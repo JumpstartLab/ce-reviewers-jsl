@@ -1,8 +1,10 @@
-# Jumpstart Lab Reviewers
+# Jumpstart Lab — CE Reviewers & Orchestrators
 
-Custom reviewer personas for the [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) Claude Code plugin.
+Custom reviewer personas and orchestrator definitions for the [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) Claude Code plugin.
 
-## Plan Reviewers
+## Reviewers
+
+### Plan Reviewers
 
 | Reviewer | Focus |
 |----------|-------|
@@ -15,7 +17,7 @@ Custom reviewer personas for the [Compound Engineering](https://github.com/Every
 | Sandy Speicher | Human-centered design, surfaces missing stakeholders |
 | Steve (Frontend) | Frontend performance, simplicity, Hotwire/Stimulus |
 
-## Code Reviewers
+### Code Reviewers
 
 | Reviewer | Focus |
 |----------|-------|
@@ -24,16 +26,36 @@ Custom reviewer personas for the [Compound Engineering](https://github.com/Every
 | Jim Weirich (Git) | Git hygiene, commits as storytelling |
 | Abby (Synthesis) | Cross-reviewer synthesis PM, prioritizes findings |
 
+## Orchestrators
+
+Orchestrators define *how* to run a project — which phases to execute, which reviewers to prioritize, when to skip steps, and how to synthesize findings.
+
+| Orchestrator | Archetype | Style |
+|---|---|---|
+| **Erin** | The Enterprise Project Manager | Full process with judgment calls, compounds learnings |
+| **LFG** | Standard Pipeline | No shortcuts — plan, work, review, ship |
+| **Max** | The Madman | Spike fast, minimal review, maximum velocity |
+| **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
+| **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
+
 ## Usage
 
-Add to your `reviewer-registry.yaml`:
+Add to your source configs:
 
 ```yaml
+# ~/.config/compound-engineering/reviewer-sources.yaml
 sources:
   - name: jsl-reviewers
     repo: JumpstartLab/ce-reviewers-jsl
     branch: main
-    path: .
+    path: reviewers
+
+# ~/.config/compound-engineering/orchestrator-sources.yaml
+sources:
+  - name: jsl-orchestrators
+    repo: JumpstartLab/ce-reviewers-jsl
+    branch: main
+    path: orchestrators
 ```
 
 Then run `/ce:refresh`.
