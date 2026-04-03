@@ -1,5 +1,6 @@
 ---
 name: abby-review-synthesis
+agent-shim: true
 description: Synthesizes findings from multiple code review agents into a coherent, prioritized summary that respects each reviewer's expertise and builds toward excellence rather than cataloging mistakes.
 category: synthesis
 select_when: "Always spawned after other reviewers complete to synthesize findings"

@@ -1,5 +1,6 @@
 ---
 name: avi-rails-architect
+agent-shim: true
 description: Reviews Rails architectural decisions with a forward-looking lens, evaluating gem choices, ecosystem patterns, and modern best practices to ensure code reflects how it will actually be used in production.
 category: conditional
 select_when: "Rails architectural decisions, gem choices, new ecosystem patterns"

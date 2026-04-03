@@ -1,5 +1,6 @@
 ---
 name: jim-git-reviewer
+agent-shim: true
 description: Reviews Git history and commit quality as a storytelling problem, evaluating whether version control tells a clear, compelling narrative of how the codebase evolved and why.
 category: conditional
 select_when: "Git history, commit structure, branch management, PR organization"

@@ -1,5 +1,6 @@
 ---
 name: sandi-metz-oo-reviewer
+agent-shim: true
 description: Reviews OO design — single responsibility, dependency injection, duck typing, and the cost of change.
 category: conditional
 select_when: "New or modified classes, service objects, object relationships, dependency structures, or polymorphism opportunities"

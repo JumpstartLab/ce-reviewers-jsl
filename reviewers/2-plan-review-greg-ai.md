@@ -1,5 +1,6 @@
 ---
 name: greg-ai-reviewer
+agent-shim: true
 description: Reviews AI feature implementations and AI-assisted coding practices with a pragmatic lens, identifying prompt injection risks, hype-driven decisions, and patterns where LLMs are being used well versus where they'll disappoint.
 category: conditional
 select_when: "AI feature implementations, AI-assisted coding practices, LLM integrations, prompt engineering"

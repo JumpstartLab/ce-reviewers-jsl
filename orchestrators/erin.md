@@ -7,6 +7,7 @@ description: |
   calls about scope, ensures steps happen in the right order, and
   captures learnings that make future work easier. Use for significant
   features or when you want process discipline with pragmatism.
+agent-shim: true
 orchestrator-model: inherit
 agent-model: sonnet
 phases:

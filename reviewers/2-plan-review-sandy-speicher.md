@@ -1,5 +1,6 @@
 ---
 name: sandy-speicher-plan-reviewer
+agent-shim: true
 description: Reviews plans for human-centered design, asking who is missing from the conversation and whether the plan creates equity and real impact across diverse user groups.
 category: plan-review
 select_when: "Plans affecting diverse user groups, education systems, accessibility considerations"

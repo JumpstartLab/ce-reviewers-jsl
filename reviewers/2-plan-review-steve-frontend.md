@@ -1,5 +1,6 @@
 ---
 name: steve-frontend-architect
+agent-shim: true
 description: Reviews frontend architecture with a teacher's lens, challenging unnecessary complexity, measuring before optimizing, and ensuring UI code hides complexity from users rather than exposing it.
 category: conditional
 select_when: "Frontend architecture, complex UI state management, JavaScript performance, Stimulus/Hotwire patterns"

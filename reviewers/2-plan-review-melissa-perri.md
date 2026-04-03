@@ -1,5 +1,6 @@
 ---
 name: melissa-perri-plan-reviewer
+agent-shim: true
 description: Identifies output-over-outcome thinking and feature-factory patterns, challenging whether plans connect features to measurable customer value and real learning.
 category: plan-review
 select_when: "Feature-focused roadmaps without clear outcomes, output-over-outcome patterns"

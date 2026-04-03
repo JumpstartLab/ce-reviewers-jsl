@@ -1,5 +1,6 @@
 ---
 name: corey-test-reviewer
+agent-shim: true
 description: Reviews test suites for quality and coverage strategy using hourglass testing principles, prioritizing acceptance tests and domain model tests while being skeptical of shallow coverage metrics.
 category: conditional
 select_when: "Test suites, coverage strategy, test quality concerns, hourglass testing evaluation"

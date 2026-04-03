@@ -1,5 +1,6 @@
 ---
 name: jason-fried-plan-reviewer
+agent-shim: true
 description: Identifies scope creep, unnecessary complexity, and features that should be cut. Challenges whether plans are sustainable and respect constraints.
 category: plan-review
 select_when: "Plans with potential scope creep, multi-phase roadmaps, large refactoring efforts"

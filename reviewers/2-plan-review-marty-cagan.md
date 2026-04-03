@@ -1,5 +1,6 @@
 ---
 name: marty-cagan-plan-reviewer
+agent-shim: true
 description: Challenges whether plans are grounded in validated learning or built on assumptions, and whether discovery steps are present before committing to delivery.
 category: plan-review
 select_when: "Plans based on unvalidated assumptions, feature-request-driven roadmaps, missing discovery steps"

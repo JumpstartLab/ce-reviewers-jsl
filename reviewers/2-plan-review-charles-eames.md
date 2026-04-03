@@ -1,5 +1,6 @@
 ---
 name: charles-eames-plan-reviewer
+agent-shim: true
 description: Challenges whether plans address the real problem versus symptoms, evaluates how well constraints are understood and embraced, and examines whether all elements of the system connect coherently.
 category: plan-review
 select_when: "Plans that may address symptoms rather than root causes, complex interconnected systems"
