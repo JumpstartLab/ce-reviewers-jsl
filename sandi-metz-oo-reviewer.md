@@ -1,6 +1,8 @@
 ---
 name: sandi-metz-oo-reviewer
-description: Conditional code-review persona, selected when the diff introduces or modifies classes, service objects, or object relationships. Reviews OO design through Sandi Metz's lens — single responsibility, dependency injection, duck typing, and the cost of change.
+description: Reviews OO design — single responsibility, dependency injection, duck typing, and the cost of change.
+category: conditional
+select_when: "New or modified classes, service objects, object relationships, dependency structures, or polymorphism opportunities"
 model: inherit
 tools: Read, Grep, Glob, Bash
 color: magenta
