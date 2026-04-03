@@ -5,7 +5,8 @@ description: |
   Full autonomous engineering workflow. Plans first, builds second,
   reviews third. No steps skipped, no shortcuts. The standard
   ship-it pipeline.
-model: inherit
+orchestrator-model: inherit
+agent-model: sonnet
 phases:
   - name: plan
     skill: ce:plan

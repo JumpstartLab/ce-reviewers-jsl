@@ -5,7 +5,8 @@ description: |
   The Madman. Spike fast, prove the concept, ship something you can
   touch. Max doesn't do ceremony — he does velocity. Use when you
   need to validate an idea before investing in polish.
-model: inherit
+orchestrator-model: inherit
+agent-model: haiku
 phases:
   - name: plan
     skill: ce:plan

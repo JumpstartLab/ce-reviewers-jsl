@@ -6,7 +6,8 @@ description: |
   impressions, documentation, and community standards. Use when
   preparing code for open source release, writing libraries, or
   building anything external developers will touch.
-model: inherit
+orchestrator-model: inherit
+agent-model: sonnet
 phases:
   - name: plan
     skill: ce:plan

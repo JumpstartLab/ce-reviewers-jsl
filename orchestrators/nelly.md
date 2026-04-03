@@ -6,7 +6,8 @@ description: |
   a fault. Nelly catches the things you'll regret in six months.
   Use for anything touching auth, payments, data migrations, or
   infrastructure.
-model: inherit
+orchestrator-model: inherit
+agent-model: sonnet
 phases:
   - name: plan
     skill: ce:plan
