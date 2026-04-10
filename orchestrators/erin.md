@@ -23,6 +23,17 @@ phases:
       Requirements are crystal clear. It's a bug fix or minor
       enhancement. The user has already thought it through and
       can articulate what "done" looks like.
+  - name: user-scenarios
+    skill: ce:user-scenarios
+    args: "stage:concept $ARGUMENTS"
+    gate: |
+      User personas must produce scenario narratives. If output is
+      thin or personas couldn't engage meaningfully, the feature
+      description may need more detail before planning.
+    optional: true
+    skip-when: |
+      Backend-only change with no user-facing behavior. Pure refactor.
+      Bug fix with no UX change. API-only work with no UI component.
   - name: plan
     skill: ce:plan
     args: "$ARGUMENTS"
@@ -42,6 +53,18 @@ phases:
       Plan is simple and low-risk. Follows well-established patterns
       in the codebase. Time-sensitive fix where the risk of delay
       exceeds the risk of a missed review finding.
+  - name: user-plan-review
+    skill: ce:user-scenarios
+    args: "stage:plan plan:$PLAN_PATH"
+    gate: |
+      User personas must review the plan. Critical questions from
+      personas (especially about missing workflows or unclear
+      navigation) should be addressed before implementation.
+    optional: true
+    skip-when: |
+      Plan is simple and low-risk. No user-facing changes. Time-
+      sensitive fix. Backend-only work. The concept stage already
+      covered all relevant user scenarios.
   - name: work
     skill: ce:work
     gate: |
@@ -50,6 +73,18 @@ phases:
   - name: review
     skill: ce:review
     args: "mode:autofix plan:$PLAN_PATH"
+  - name: user-testing
+    skill: ce:user-scenarios
+    args: "stage:implementation plan:$PLAN_PATH"
+    gate: |
+      User persona testing must complete. Critical UX gaps — where
+      a persona cannot complete the core task — must be fixed before
+      proceeding. Non-critical polish items can be tracked as follow-up.
+    optional: true
+    skip-when: |
+      Backend-only change. API-only change with no UI. Pure refactor
+      with no behavior change. The feature has no interactive user
+      interface.
   - name: todo-resolve
     skill: compound-engineering:todo-resolve
   - name: test-browser
@@ -133,8 +168,17 @@ Use judgment, not rigid rules:
 
 - Skip brainstorming when requirements are crystal clear, it's a
   bug fix, or the user has already thought it through.
+- Skip user-scenarios when the change is backend-only, a pure
+  refactor, or has no user-facing behavior. When in doubt for
+  UI work, run it — personas catch problems humans miss.
+- Skip user-plan-review when the plan is simple, the concept
+  stage already covered scenarios thoroughly, or there are no
+  user-facing changes in the plan.
 - Abbreviate plan review when the plan is simple, low-risk, and
   follows established patterns.
+- Skip user-testing for backend-only or API-only changes. For
+  UI features, lean toward running it — this is where the
+  personas catch the "Open Project does nothing" class of bugs.
 - Skip feature-video for backend-only changes or internal tooling.
 - Never skip compound for anything that taught you something,
   anything that took longer than expected, or anything you'd want
