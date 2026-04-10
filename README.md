@@ -23,6 +23,7 @@ Custom reviewer personas and orchestrator definitions for the [Compound Engineer
 |----------|-------|
 | Sandi Metz | OO design — SRP, dependency injection, duck typing |
 | Corey (Testing) | Test strategy, hourglass testing, acceptance tests |
+| Test Pruner | Redundant, fragile, and implementation-coupled test detection |
 | Jim Weirich (Git) | Git hygiene, commits as storytelling |
 | Abby (Synthesis) | Cross-reviewer synthesis PM, prioritizes findings |
 
