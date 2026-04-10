@@ -1,6 +1,6 @@
-# Jumpstart Lab — CE Reviewers & Orchestrators
+# Jumpstart Lab — CE Reviewers, Orchestrators & User Personas
 
-Custom reviewer personas and orchestrator definitions for the [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) Claude Code plugin.
+Custom reviewer personas, orchestrator definitions, and user personas for the [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) Claude Code plugin.
 
 ## Reviewers
 
@@ -39,6 +39,18 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
 | **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
 
+## User Personas
+
+User personas simulate distinct user archetypes to scenario-test features from real perspectives. Spawned via `/ce:user-scenarios`.
+
+| Persona | Archetype | Catches |
+|---------|-----------|---------|
+| **Betty** | Power user | Partial failures, stale data, missing bulk operations |
+| **Chuck** | Careless user | Missing validation, unhandled errors, skipped instructions |
+| **Dorry** | Design-minded user | Visual inconsistency, alignment issues, aesthetic gaps |
+| **Mark** | Mobile-first user | Responsive gaps, connectivity failures, input mode limits |
+| **Nancy** | Cautious user | Missing affordances, unclear navigation, ambiguous feedback |
+
 ## Usage
 
 Add to your source configs:
@@ -57,6 +69,13 @@ sources:
     repo: JumpstartLab/ce-reviewers-jsl
     branch: main
     path: orchestrators
+
+# ~/.config/compound-engineering/user-sources.yaml
+sources:
+  - name: jsl-users
+    repo: JumpstartLab/ce-reviewers-jsl
+    branch: main
+    path: users
 ```
 
 Then run `/ce:refresh`.
