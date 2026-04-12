@@ -2,7 +2,7 @@
 name: mark
 type: user-persona
 description: Mobile-first user on the move — phone, Telegram, Claude, speech-to-text, spotty connections. Catches responsive design gaps, connectivity failures, and input mode limitations.
-model: haiku
+model: sonnet
 traits:
   pace: fast-and-interrupted
   tech-comfort: high
