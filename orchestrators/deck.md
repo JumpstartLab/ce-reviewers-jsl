@@ -65,25 +65,39 @@ phases:
       conventions, reuse of template patterns. Invented patterns
       that duplicate existing components are blockers.
 
-  - name: everyday-usability
+  - name: audience-review
     skill: ce:user-scenarios
-    args: "stage:implementation personas:dorry,nancy,mark plan:$PLAN_PATH"
+    args: "stage:implementation personas:$AUDIENCE_PERSONAS plan:$PLAN_PATH"
     gate: |
-      Dorry reviews every slide rendered in the browser. Visual
-      inconsistency — misaligned elements, off-grid text, font-weight
-      drift, color-token violations — is a blocker, not a polish
-      item. A deck that feels unfinished undermines the content.
+      Audience personas review every slide as if sitting in the
+      room the deck will be delivered to. The personas are Simon
+      (Skeptic), Eileen (Busy Executive), Vera (Expert), Pete
+      (Newcomer), and Dana (Decision-Maker). Dorry reviews craft;
+      the audience personas review story.
 
-      Nancy checks that the arc reads clearly on first view: can
-      she predict each next slide? Are transitions signposted?
+      Which three audience personas run depends on the deck's
+      stated audience, captured in the brainstorm phase:
 
-      Mark checks mobile/projection readability: text legible from
-      the back of a room, contrast sufficient under stage lights,
-      no dependence on hover or fine detail.
+      - Proposal / sales deck → Simon, Eileen, Dana
+      - Conference talk → Vera, Pete, Simon
+      - Internal pitch / board update → Eileen, Simon, Dana
+      - Teaching / workshop intro → Pete, Vera, Dana
+      - Fundraising → Eileen, Simon, Dana
 
-      Betty and Chuck are skipped for decks — they're power-user
-      and careless-user personas tuned for interactive software,
-      not linear presentations.
+      If the deck's audience is mixed or unclear, default to
+      Simon + Eileen + Dana and flag that the audience should
+      be sharpened.
+
+      Dorry also runs, focused on craft: visual inconsistency,
+      misaligned elements, font-weight drift, color-token
+      violations. "Feels unfinished" is a blocker, not polish.
+
+      Any persona that reports being unable to follow the arc,
+      being lost by mid-deck, or unable to answer their core
+      questions (Dana's four, Pete's bridge test, etc.) blocks
+      merge. Simon's incongruency findings — number mismatches,
+      definitional drift, cold introductions — are always
+      blockers.
 
   - name: test-browser
     skill: compound-engineering:test-browser

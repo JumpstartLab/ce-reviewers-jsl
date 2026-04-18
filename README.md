@@ -52,6 +52,16 @@ User personas simulate distinct user archetypes to scenario-test features from r
 | **Mark** | Mobile-first user | Responsive gaps, connectivity failures, input mode limits |
 | **Nancy** | Cautious user | Missing affordances, unclear navigation, ambiguous feedback |
 
+### Audience Personas (for decks and presentations)
+
+| Persona | Archetype | Catches |
+|---------|-----------|---------|
+| **Simon** | The Skeptic | Unsupported claims, number mismatches, definitional drift, cold introductions |
+| **Eileen** | The Busy Executive | Buried leads, missing TL;DR, topic-style slide titles, meandering setup |
+| **Vera** | The Subject-Matter Expert | Oversimplification, broken analogies, stale references, missed nuance |
+| **Pete** | The Newcomer | Unexplained jargon, missing bridges, concepts used before defined |
+| **Dana** | The Decision-Maker | Vague asks, missing why-now, no differentiation, no Monday-morning plan |
+
 ## Usage
 
 Add to your source configs:
