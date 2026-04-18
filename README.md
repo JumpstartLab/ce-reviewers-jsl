@@ -38,7 +38,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 | **Max** | The Madman | Spike fast, minimal review, maximum velocity |
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
 | **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
-| **Deck** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
+| **Ted** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
 | **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 
 ## User Personas
