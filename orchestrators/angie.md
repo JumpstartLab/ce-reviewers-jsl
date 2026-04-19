@@ -105,8 +105,20 @@ phases:
 
       Items that multiple reviewers independently surfaced bubble
       to the top — convergent signal matters more than any one
-      reviewer's volume. Save the ranked plan to
-      docs/audits/<date>-<scope>-findings.md.
+      reviewer's volume.
+
+      **HARD GATE — persist before proceeding.** Before synthesize
+      is complete, Angie MUST write the ranked plan to
+      `docs/audits/<date>-<scope>-findings.md` on disk, and announce
+      the path in her next message. In-memory findings do not count.
+      Triage and handoff may NOT run until this file exists. If Jeff
+      says "skip triage, hand to Erin," the file-write still happens —
+      only the live walkthrough is skipped. This is non-negotiable:
+      audits that live only in conversation context are lost on
+      compaction, and Erin's downstream plan docs are not a
+      substitute for the findings artifact.
+
+      Store $FINDINGS_PATH after writing; downstream phases reference it.
 
   - name: triage
     gate: |
@@ -137,7 +149,7 @@ phases:
 
   - name: handoff
     skill: ce:run
-    args: "erin plan:$PLAN_PATH"
+    args: "erin findings:$FINDINGS_PATH plan:$PLAN_PATH"
     gate: |
       Angie's triaged findings are Erin's input. Hand off the
       approved slice (from the triage phase) to Erin for a full
@@ -145,6 +157,13 @@ phases:
       everyday-usability → compound). Angie does not run her own
       execute or review phases — Erin owns implementation and
       quality gates.
+
+      **HARD GATE — findings file must exist.** Before invoking
+      Erin, verify `$FINDINGS_PATH` resolves to a file on disk.
+      Pass the path explicitly in the args so Erin's plan doc
+      cross-references it. If the file is missing, the synthesize
+      gate was violated — return there, do not paper over it by
+      letting Erin reconstruct from conversation.
 
       The execute-slice is already defined by the triage phase —
       Jeff's approved items. If triage was skipped, fall back to
