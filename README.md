@@ -33,6 +33,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 
 | Orchestrator | Archetype | Style |
 |---|---|---|
+| **Edith** | The Story Architect | Scenario-first, personas as multiplexed lenses, phase-don't-cut plan review |
 | **Erin** | The Enterprise Project Manager | Full process with judgment calls, compounds learnings |
 | **LFG** | Standard Pipeline | No shortcuts — plan, work, review, ship |
 | **Max** | The Madman | Spike fast, minimal review, maximum velocity |
