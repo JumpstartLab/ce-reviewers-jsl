@@ -78,6 +78,7 @@ phases:
 
   - name: work
     skill: ce:work
+    wrapped: true
     gate: |
       Feature must be implemented and working locally. No partial
       implementations — if it's not done, keep working. For UI work,
@@ -354,6 +355,171 @@ Use judgment, not rigid rules:
 - Never skip compound for anything that taught you something, took
   longer than expected, or revealed a pattern you'd want caught
   next time.
+
+## Wrapped phases
+
+Some phases in your `phases:` list have `wrapped: true` (currently
+just `work`). For those phases, ce-run yields control to you instead
+of invoking the skill in-thread. Run them like this — the goal is
+to keep the wrapped phase's tool churn out of your main-thread
+context while preserving live terminal streaming.
+
+### Run-state file
+
+Maintain `docs/runs/<run-id>/run-state.md` for the entire workflow.
+`<run-id>` is `YYYY-MM-DD-HH-MM-SS-erin-<slug>`, captured once at
+workflow start. The file looks like:
+
+```markdown
+---
+run_id: 2026-05-07-14-23-00-erin-foo
+current_phase: work
+current_phase_status: dispatched   # about_to_dispatch | dispatched | completed | failed
+pre_dispatch_sha: abc123           # only when a wrapped phase is in flight or recently returned
+last_updated: 2026-05-07T14:48:30Z
+---
+
+## Workflow Trace
+- 2026-05-07T13:00Z brainstorm: completed
+- 2026-05-07T13:45Z plan: completed
+- 2026-05-07T14:23Z work: dispatched (wrapped, sha abc123)
+
+## Recommended Next Action
+[One sentence — what comes next.]
+```
+
+Use the `Write` tool — its built-in atomicity is sufficient. Do not
+ceremony around temp-file-rename. Update run-state at every
+transition (about_to_dispatch, dispatched, completed/failed,
+phase boundaries).
+
+### Dispatch sequence (entering a wrapped phase)
+
+1. Write run-state.md with `current_phase_status: about_to_dispatch`.
+2. Capture `pre_dispatch_sha = git rev-parse HEAD`.
+3. Update run-state.md with `current_phase_status: dispatched` and
+   `pre_dispatch_sha: <sha>`.
+4. Dispatch via the `Agent` tool with `model: opus`. The prompt is
+   the skill invocation plus its `args:` from the phase entry, plus
+   the constraints below.
+
+### Constraints injected into the wrapped subagent's prompt
+
+The Claude Code platform does not give subagents the `Agent` tool
+(verified spike, 2026-05-07 — see
+`docs/solutions/2026-05-07-agent-tool-depth-2-spike.md`). Any
+sub-skill the wrapped phase invokes that internally dispatches via
+`Agent` will fail mid-flight. Your dispatch prompt MUST therefore
+include both of these clauses verbatim or in equivalent words:
+
+- "Choose **Inline** execution strategy in `/ce:work` Phase 1
+  step 4. Do NOT use Serial subagents, Parallel subagents, or Swarm
+  Mode — they require the Agent tool, which subagents do not have,
+  and will fail at depth-2."
+- "Do NOT invoke `/ce:review`, `/ce:plan`, `/ce:brainstorm`, or any
+  other skill that internally dispatches subagents. Those are
+  separate Erin phases and must not be nested inside this wrapped
+  `work` phase."
+
+Also pass: the plan path (`$PLAN_PATH`), the run-id, the path where
+the subagent should write its handoff (`docs/runs/<run-id>/handoffs/work.md`),
+and the handoff schema below. If a future plan genuinely needs
+internal Agent fan-out, escalate out of the v1 envelope (Workaround
+B in the spike findings) — do not silently relax these clauses.
+
+### Handoff schema (what the wrapped subagent writes back)
+
+The subagent writes `docs/runs/<run-id>/handoffs/<phase>.md` before
+returning:
+
+```markdown
+---
+phase: work
+started: 2026-05-07T14:23Z
+completed: 2026-05-07T14:48Z
+status: success                    # success | partial | failed | needs-input
+---
+
+## Outcome
+[One sentence.]
+
+## Artifacts
+- Plan: docs/plans/...
+- Commits: <sha1> <sha2>
+
+## Recommended Next Phase Action
+[One sentence.]
+
+## Judgment Calls For Erin
+[Optional — omit when nothing to flag.]
+
+## Open Questions
+[Required iff status is `needs-input`. Each question is something
+the user must answer before re-running.]
+```
+
+There is no `claimed_files` / `claimed_lines` field. `git diff` is
+ground truth and you read it directly.
+
+### Verification on return
+
+1. Read the handoff at `docs/runs/<run-id>/handoffs/<phase>.md`.
+2. Run `git diff --stat <pre_dispatch_sha>` (no `..HEAD` — this
+   includes working-tree changes, since legitimate `/ce:work` runs
+   may stage but not commit). Parse the totals into
+   `verified_files` and `verified_lines`.
+3. **Empty-success check.** If `status` is `success` or `partial`
+   AND `verified_files == 0` AND `verified_lines == 0`, treat the
+   subagent as suspicious and re-spawn ONCE with a corrective
+   prompt that names the missing evidence: "Your prior return
+   reported success but `git diff --stat <sha>` shows zero changes.
+   Either you didn't actually do the work, or you need to make your
+   changes visible. Run again." If the second attempt is also
+   empty-success, surface to the user: present the handoff, the
+   git diff result, and ask how to proceed.
+4. **needs-input is a hard halt.** Surface the subagent's
+   `## Open Questions` to the user and stop. Do not auto-resume.
+   The user re-runs `/ce:run erin <args including answers>` to
+   continue. Update run-state.md with `current_phase_status: failed`
+   and a trace line noting the halt reason.
+5. **Failure recovery.** If the dispatch errored (Agent tool error,
+   malformed handoff frontmatter, missing artifacts referenced in
+   the handoff), re-spawn ONCE with a corrective prompt naming the
+   specific failure. If the second attempt also fails, surface to
+   the user.
+6. Otherwise update run-state.md with `current_phase_status:
+   completed`, append a Workflow Trace line including verified
+   evidence, and proceed to the next phase using your judgment as
+   you would today (no formal "Erin disagrees" protocol).
+
+### Resume protocol (after `/compact` mid-workflow)
+
+When the user re-runs `/ce:run erin` and a run-state.md already
+exists for the current run-id:
+
+1. Read run-state.md.
+2. List `docs/runs/<run-id>/handoffs/`. If any handoff has an
+   mtime newer than run-state.md's last_updated, the subagent
+   returned but the post-return write was lost — reconcile by
+   running the verification steps above as if the subagent had just
+   returned.
+3. Otherwise resume from `current_phase` + `current_phase_status`:
+   - `about_to_dispatch` → re-dispatch (the prior dispatch never
+     happened or was lost).
+   - `dispatched` → check for a handoff; if absent, the subagent
+     was interrupted — surface to user and ask whether to re-spawn
+     or abandon.
+   - `completed` / `failed` → proceed to the next phase / surface,
+     respectively.
+
+### What this is and isn't
+
+- It is: an isolation mechanism for the work phase's tool churn,
+  plus a small persistent thread for `/compact` survival.
+- It is not: a generic wrapping primitive, a Tina persona, an
+  in-flight dialogue protocol, a tiered sanity-check engine, or a
+  formal disagreement framework. Add those on evidence from real
+  use, not anticipation.
 
 ## When a project completes
 
