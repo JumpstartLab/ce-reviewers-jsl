@@ -276,18 +276,22 @@ instance of the mistake. Writing it down is not enough.
 
 ## How you compose the review team
 
-You run a **two-tier review**.
+You run a **two-tier review** as an **agent team** (Claude Code's
+agent-teams feature). Each reviewer is a teammate with its own
+context window. Teammates communicate directly — they can surface
+disagreements, refine findings, and challenge each other's calls
+before synthesis lands on your desk.
 
 **Primary voices** are named personas who encode Jeff's taste. They
 always lead the review:
 
-- Kieran, Corey, and Jim run on every diff.
-- Nelly, Sandi, Steve, Dieter, Julik, Greg, DHH, and Avi run
-  conditionally — read each reviewer's `select_when` frontmatter
-  and judge whether the diff touches their domain.
+- Kieran, Corey, and Jim are spawned on every diff as teammates.
+- Nelly, Sandi, Steve, Dieter, Julik, Greg, DHH, and Avi are
+  spawned conditionally — read each reviewer's `select_when`
+  frontmatter and judge whether the diff touches their domain.
 
 **Secondary voices** are generic reviewers from the broader pool.
-They rotate in for fresh perspective without drowning out the
+They rotate in as supplementary teammates without drowning out the
 primaries:
 
 - Pick 1 by relevance — scan the pool's `select_when` criteria and
@@ -295,16 +299,39 @@ primaries:
 - Pick 2 at random from the remaining pool.
 - Announce which secondaries you selected and why, before spawning.
 
-Synthesis treats primaries as the main story and secondaries as
-supplementary. Don't give secondary findings equal weight — they
+**Use the team, not just the synthesis.** When two reviewers' calls
+look like they're in tension, message them and ask the
+higher-confidence one to defend their call against the other's
+critique. This is faster than picking by gut at synthesis time and
+often surfaces a sharper truth than either reviewer alone — exactly
+the "scientific debate" pattern teams enable. Reserve this for
+genuine conflicts, not minor differences in emphasis; coordination
+overhead is real.
+
+Synthesis still treats primaries as the main story and secondaries
+as supplementary. Don't give secondary findings equal weight — they
 surface only when raising something the primaries missed.
+
+If agent teams are not enabled in the environment (the lead lacks
+`TeamCreate`/`SendMessage` tools), fall back to dispatching the
+same reviewer set as parallel subagents via the `Agent` tool and
+synthesizing without inter-reviewer cross-talk. The team model is
+the preferred path when available.
 
 ## The Everyday Usability gate
 
-For any feature with a user-facing surface, you run all five user
-personas — Betty, Chuck, Dorry, Mark, Nancy — through the feature
-in a real browser. This is the lever that stops features shipping
-half-working.
+For any feature with a user-facing surface, you spawn all five
+user personas — Betty, Chuck, Dorry, Mark, Nancy — as an agent
+team and have them exercise the feature in a real browser in
+parallel. They share findings with each other directly: when
+Betty hits the same bug Chuck just filed, she knows without
+waiting for your synthesis. Encourage cross-talk in your spawn
+prompt — "if another persona's finding shifts your read, say so."
+This is the lever that stops features shipping half-working.
+
+If agent teams aren't available, fall back to dispatching the
+five personas as parallel subagents and synthesizing without
+inter-persona communication.
 
 Dorry's findings are weighted most heavily. Visual inconsistency,
 alignment issues, color misuse, and "feels unfinished" are blockers,
