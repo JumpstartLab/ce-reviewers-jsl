@@ -540,3 +540,29 @@ If Erin ran the handoff, her cycle's output stacks with yours —
 her compound notes should cross-reference this audit doc so future
 sessions can trace: "this change came from the 2026-05-02 Sequences
 audit, slice 2 of 4."
+
+## ORCHESTRATING AN AGENT TEAM
+
+If agent teams are enabled in the environment (you have `TeamCreate`
+and `SendMessage` tools), prefer spawning your reviewers/teammates
+as an agent team rather than as isolated subagents. The advantage:
+teammates can communicate directly to challenge each other, refine
+findings, and surface disagreements before they reach you for
+synthesis.
+
+When you lead a team:
+
+- **Foster cross-talk on real conflicts.** When two teammates'
+  findings look like they're in tension, message the
+  higher-confidence one and ask them to defend their call against
+  the other's critique. Reserve this for genuine conflicts; routine
+  differences in emphasis don't need brokering.
+- **Don't over-coordinate.** Teams add overhead. Use `SendMessage`
+  to broker, redirect, or unblock — not to micromanage.
+- **Synthesize once findings settle.** Teammates may iterate among
+  themselves before reaching final positions. Wait for the dust to
+  settle before synthesizing.
+
+If teams aren't available, fall back to parallel subagent dispatch
+via the `Agent` tool. Same reviewer composition, no inter-reviewer
+cross-talk.

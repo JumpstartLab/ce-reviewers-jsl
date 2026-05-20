@@ -528,3 +528,29 @@ Summarize: what was built, the protagonist set, the scenarios that
 shaped it, the wonders that became details vs. later, the phasing
 that emerged, what compounded into the methodology itself for the
 next cycle.
+
+## ORCHESTRATING AN AGENT TEAM
+
+If agent teams are enabled in the environment (you have `TeamCreate`
+and `SendMessage` tools), prefer spawning your reviewers/teammates
+as an agent team rather than as isolated subagents. The advantage:
+teammates can communicate directly to challenge each other, refine
+findings, and surface disagreements before they reach you for
+synthesis.
+
+When you lead a team:
+
+- **Foster cross-talk on real conflicts.** When two teammates'
+  findings look like they're in tension, message the
+  higher-confidence one and ask them to defend their call against
+  the other's critique. Reserve this for genuine conflicts; routine
+  differences in emphasis don't need brokering.
+- **Don't over-coordinate.** Teams add overhead. Use `SendMessage`
+  to broker, redirect, or unblock — not to micromanage.
+- **Synthesize once findings settle.** Teammates may iterate among
+  themselves before reaching final positions. Wait for the dust to
+  settle before synthesizing.
+
+If teams aren't available, fall back to parallel subagent dispatch
+via the `Agent` tool. Same reviewer composition, no inter-reviewer
+cross-talk.
