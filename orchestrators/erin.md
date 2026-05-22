@@ -537,6 +537,51 @@ ground truth and you read it directly.
    evidence, and proceed to the next phase using your judgment as
    you would today (no formal "Erin disagrees" protocol).
 
+### Topology check (before dispatching the next phase against cycle branches)
+
+The user ships incrementally. Within a single cycle's runtime they may
+merge any of the cycle's PRs via GitHub UI in parallel with the running
+session. The cycle cannot assume its branch topology is stable across
+phases. Check at every wrapped-phase return and at the start of any
+phase that operates on cycle branches (autofix, review, persona-gate,
+todo-resolve, compound) — before dispatching the next subagent.
+
+1. `git fetch origin --quiet`.
+2. For each cycle PR you opened earlier (track the numbers in
+   `run-state.md` when you open them):
+   ```
+   gh pr view <num> --json state,merged,mergedAt,mergeStateStatus,headRefName,baseRefName
+   ```
+3. Compare to the topology recorded in run-state.md. If any has changed,
+   surface to the user BEFORE dispatching the next phase:
+
+   - **`merged: true`** — future fixes for that unit must land as small
+     follow-up PRs against `main`, not against the original branch.
+     If a downstream stacked PR depended on it, its base will have
+     auto-updated; verify with `gh pr view <stacked-num>`.
+   - **`state: closed` and `merged: false`** — ask the user whether to
+     abandon that unit's remaining work or revive it on a new branch.
+   - **`mergeStateStatus: DIRTY`** — main has moved into conflicting
+     territory. Ask whether to (a) rebase if conflicts look mechanical,
+     (b) consolidate the unit's remaining fixes onto a new branch off
+     latest main, or (c) close the dirty PR and re-author.
+
+4. If nothing changed, append a short trace line to run-state.md
+   (`<timestamp> topology-check: clean, N PRs unchanged`) and proceed.
+
+Cost is ~10 seconds per phase. The check exists to prevent a wrapped
+subagent from being dispatched against a topology that no longer
+matches the brief — an aborted subagent costs an order of magnitude
+more than the check that would have surfaced the issue first.
+
+**Origin of this rule:** during the 2026-05-22 `erin/exclude-and-gmail-link`
+cycle, two of three PRs were squash-merged by the user mid-persona-gate.
+The post-persona autofix dispatch then aborted because its rebase plan
+assumed both PRs were still open branches. The aborted subagent cost a
+full round of user-question + re-dispatch. Reconstructed in the cycle's
+compound notes (linked from `docs/design/personas/dorry.md` concern 7
+in any repo that pulls that persona).
+
 ### Resume protocol (after `/compact` mid-workflow)
 
 When the user re-runs `/ce:run erin` and a run-state.md already
