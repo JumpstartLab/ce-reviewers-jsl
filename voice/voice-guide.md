@@ -114,6 +114,10 @@ Reach for these. Tags: **[all]**, or the band(s) where the move lives.
 - **Fragments are a tool** [all]: "Ableist. Xenophobic." "Right? Right? No."
 - **One-line paragraphs** carry weight — let a single sentence stand alone.
 - **Anaphora sets a beat**, then break it so it doesn't sing-song.
+- **Don't land every beat on a button.** Reaching for a quotable clincher at the
+  end of every paragraph is itself an AI tell. Let paragraphs end flat when the
+  content is done; earn the occasional short landing, don't manufacture one each
+  time. A page of mic-drops is a page nobody trusts.
 - **Final gate:** read it out loud; if a sentence sounds like an AI wrote it,
   rewrite it (`lint-rules.md`).
 
@@ -131,6 +135,16 @@ comes from plain words used honestly.
 - **The hollow inflation** "it's not just X — it's a whole Y" that sounds profound
   about nothing. Distinct from the earned reframe (§3): does "B" deliver a
   specific correction (keep) or a vague upgrade in importance (kill)?
+- **The decorative symmetric construction** — the single most reliable AI
+  fingerprint in Jeff's read. The rule-of-three with matching grammar
+  ("Preferences is how. Memory is what. Projects is where."), the tidy "not A,
+  but B" button, the rhyming aphorism ("when in doubt, leave it out") — any
+  parallelism whose only job is to *sound* clever. Closed, balanced, quotable,
+  and empty. Cut it and just say the thing. **This is NOT** the earned reframe
+  (§3) or argument-bearing anaphora (§3–§4), where the parallel carries a real
+  point or rising emotion and usually *breaks* its own pattern ("Right? Right?
+  No."). The reframe-as-opener is on-voice ("Claude is brilliant and has
+  amnesia."). The test: is the structure earning a point, or performing one?
 - Throat-clearing, hedges ("honestly," "arguably," "somewhat"), empty intensifiers
   ("very," "really," "incredibly").
 
@@ -155,6 +169,11 @@ comes from plain words used honestly.
   numbered lived evidence → tie to mission → short close. `lint-rules.md` governs.
 - **Technical doc / README.** Structure is a feature: Summary → Evidence → Why it
   matters → Options → What we did; concrete numbers; "ruled out:" reasoning.
+- **How-to / getting-started guide.** A *how*, not a *why*. A brief intro that
+  says what it is and the payoff, then a few practical, imperative bullets — do
+  this, then this. Don't argue the case or explain the mechanism at length; the
+  reader wants to act, not be convinced. Match the genre before the sentence:
+  ask "is this instructions or an essay?" first.
 - **Email.** The one remaining gap — no verified sample yet. Provisional: open
   with the ask/answer, one screen, end with the single next action.
 
@@ -212,6 +231,19 @@ education, software, AI-native engineering, mission-driven leadership.
 
 ## 11. Changelog (Perkins appends here)
 
+- 2026-07-17 (v4.2) — Compound (live Jeff correction, Hindsight getting-started
+  draft): added the **decorative symmetric construction** to §5's kill-list —
+  the matching-grammar rule-of-three, the tidy "not A, but B" button, rhyming
+  aphorisms — parallelism whose only job is to sound clever. Jeff calibrated:
+  it's the *symmetric/closed* structures that read AI; the reframe-as-opener
+  stays on-voice. Added a §4 rule: don't land every beat on a manufactured
+  clincher; let paragraphs end flat. Surfaced because the seven-voice panel
+  passed the draft as on-voice while Jeff read it as AI — the tell was the
+  structural symmetry the move-checklist was rewarding, not diction. King and
+  Orwell now have the guide rule to fail it next run. Also added a §6 rule:
+  **how-to / getting-started guides are a *how*, not a *why*** — brief intro plus
+  practical bullets, not an argument (the first draft came back over-sized as an
+  essay; match the genre before the sentence).
 - 2026-07-16 (v4.1) — Compound (from a live Jeff correction): §7 now requires
   **Title-Cased** section headers in essays, not sentence case. Surfaced while
   drafting the first two JSL blog posts.
