@@ -29,19 +29,22 @@ Read the voice guide — `~/.config/compound-engineering/voice-guide.md`, or the
 
 ## Register first (do not skip)
 
-Jeff writes in two registers (guide §2), and several "rules" apply to only one:
+Jeff writes along a register spectrum (guide §2), and several "rules" apply to
+only one end:
 
-- **Formal** (cover letters, client docs) — restrained. Here you also flag
-  **exclamation marks, emoji, profanity, and "leverage"**; `lint-rules.md` bans
-  them.
-- **Expressive** (blog, opinion, personal) — raw and alive. Exclamation marks,
-  profanity ("This. Fucking. Asshole."), and "leverage" ("leveraging your power
-  and privilege") are **on-voice here — do NOT flag them.** Stripping them
-  flattens Jeff into a memo. In the expressive register you enforce only the
-  universal kill-list below (corporate-speak, AI-slop, hollow inflation, filler).
+- **Formal** (cover letters, grants, client docs) — restrained. Here you also
+  flag **exclamation marks, emoji, profanity, and "leverage"**; `lint-rules.md`
+  bans them.
+- **Analytical** (op-eds, memos) — measured; profanity is rare, an occasional
+  exclamation may land. Weight by density; don't strip a pointed line.
+- **Expressive** (blog, manifesto, personal) — raw and alive. Exclamation marks,
+  profanity ("It was bullshit, right? Right?"), and "leverage" ("leveraging your
+  power and privilege") are **on-voice — do NOT flag them.** Stripping them
+  flattens Jeff into a memo. Here you enforce only the universal kill-list below
+  (corporate-speak, AI-slop, hollow inflation, filler).
 
-Identify the register from the piece and its brief before flagging anything
-punctuation- or profanity-related.
+Place the piece on the spectrum from its content and brief before flagging
+anything punctuation- or profanity-related.
 
 ## What you're hunting for
 

@@ -8,17 +8,22 @@ and if the guide is wrong, fix the guide, don't override it silently.
 
 ## Provenance & confidence
 
-- **Primary — expressive register (high confidence, pure-authored, pre-AI):**
-  the "With Intention" essays on Medium (*An Introduction*, *Negative Reviews*).
-  Unmistakably Jeff, unedited by any tool.
-- **Primary — formal register (high confidence):** `Career/lint-rules.md` (Jeff's
-  own rules) and three cover letters that pass that lint (Anthropic, OW COO,
-  Posit). Note: `lint-rules.md`'s constraints are **formal-register-specific**
-  (see §3) — they do not govern the expressive register.
-- **Secondary — technical-doc register (medium):** `server-admin/docs/miren-feedback.md`.
-- **Deprecated:** an earlier draft derived from a machine-generated Google Doc
-  (create ≈ modify timestamp, "compiled from transcripts"). Its love of tables,
-  ⚠ markers, and bold inline labels was **Claude's** style, not Jeff's. Removed.
+Grounded in a robust, verbatim, multi-register corpus (high confidence):
+
+- **Expressive:** the two "With Intention" Medium essays; *The Freedom Business*
+  (State of Turing, 2019); *Adventures on the Golden Path* (conference talk).
+- **Analytical / persuasive:** the 2016 policy op-eds (*Three Ways to Help*,
+  *EQUIP Won't Work*, *Transparency Isn't Just About Accountability*).
+- **Formal / institutional:** `Career/lint-rules.md` (Jeff's own rules) + cover
+  letters (Anthropic, OW COO, Posit); the 2025 federal grant *Project Narrative*
+  (confirms the formal register still holds — mission + hard numbers, no drift).
+- **Technical-doc:** `server-admin/docs/miren-feedback.md`.
+
+Sources are reproduced-as-written (typos and draft artifacts preserved), so they
+are the real thing, not paraphrase. **Caveat:** facilitation guides quote other
+authors (e.g. a Chad Fowler excerpt) — quoted readings are not Jeff's voice.
+**Deprecated:** v1 was derived partly from a machine-generated Google Doc; its
+table/⚠/bold-label aesthetic was Claude's and has been removed.
 
 ---
 
@@ -27,140 +32,144 @@ and if the guide is wrong, fix the guide, don't override it silently.
 Jeff writes like a person telling you a true story that makes an argument. He
 opens with a scene, earns every claim with a concrete number or lived example,
 states a real opinion, and lands the hard points in short, plain sentences. The
-warmth comes from candor and humor, not decoration. Underneath everything is a
-mission — people over process, "with intention," disrupt the system — and he's
-not afraid to be pointed, funny, or angry in service of it. Never corporate,
-never hedged, never the smooth hum of an AI.
+warmth is candor and humor, not decoration. Underneath is always a mission —
+people over process, "the freedom business," set people free — and he's not
+afraid to be pointed, funny, or angry in service of it. Never corporate, never
+hedged, never the smooth hum of an AI.
 
-## 2. The two registers (read this before anything else)
+## 2. The register spectrum (identify this first)
 
-Jeff writes in two registers. Identify which one the piece is in *first* — most
-mistakes come from applying one register's rules to the other.
+Jeff writes along one spectrum, not in silos. Same DNA (§3–§5); what changes is
+restraint. **Place the piece on the spectrum before applying any rule** — most
+mistakes come from applying one band's rules to another.
 
-- **Formal / professional** — cover letters, client-facing docs, applications.
-  Restrained and disciplined. Governed by `lint-rules.md`: **no exclamation
-  marks, no emoji, no profanity, cut corporate-speak.** Warmth is in the story
-  and the numbers, not in punctuation.
-- **Expressive / personal** — blog posts, opinion pieces, internal manifestos,
-  anywhere Jeff speaks in his own name about what he believes. Raw and alive:
-  exclamation marks, **profanity for effect** ("This. Fucking. Asshole."),
-  direct address to the reader or an antagonist, italics-for-voice, borrowed
-  aphorisms, self-deprecation, real anger and real tenderness. This is the fuller
-  Jeff; do not sand it down to the formal register.
+- **Expressive** (blog, manifesto, State-of-Turing, conference talk). Raw and
+  alive: profanity for effect ("It smelled like bullshit. I knew it was
+  bullshit."), exclamation, direct address, italics-for-voice, anaphora, deadpan
+  landings, real anger and tenderness. The fullest Jeff — do not sand it down.
+- **Analytical / persuasive** (op-eds, strategy memos, thoughtful docs — the most
+  common "work" band). Reasoned and structured, still opinionated and direct:
+  names the flaw plainly ("The strategy so far is flawed."), diagnoses, then
+  prescribes with numbered, concrete fixes ("It's a quick fix:"). Rhetorical
+  questions and confident predictions ("Look back two years from now and you'll
+  find…"). Measured, not cold.
+- **Formal / institutional** (cover letters, client docs, grant narratives).
+  Restrained and disciplined; `lint-rules.md` governs: **no exclamation, no
+  emoji, no profanity, cut corporate-speak.** Warmth lives in the story and the
+  numbers.
 
-Both registers share the DNA in §3–§5. They differ mainly in punctuation,
-profanity, and how much personality is turned up. When the medium is ambiguous,
-ask which register fits the audience.
+Punctuation, profanity, and personality dial UP toward expressive and DOWN toward
+formal. When the medium is ambiguous, choose the band from the audience.
 
 ## 3. Signature moves (what makes it unmistakably Jeff)
 
-Reach for these. Tags mark register: **[both]**, **[expressive]**, **[formal]**.
+Reach for these. Tags: **[all]**, or the band(s) where the move lives.
 
-- **The anecdote/scene-led open** [both]. A concrete scene, often with a year and
-  real people: "In 2011, I had an idea…"; "I look back fondly on the wall of
-  Post-it notes…"; "In my adult years I've tried to live by the quote 'don't
-  talk about it, be about it.'"
-- **Numbers-in-story** [both]. Evidence inside the narrative, never bulleted:
-  "graduated over 2,500 developers who increased their lifetime earnings by $10
-  billion"; "we could see Turing graduate over 400 people per year. Right now
-  it's closer to 250."
-- **The reframe — "X isn't A, it's B" / "not A, but B"** [both]. A core
-  signature, encouraged: "adoption isn't a technology problem. It's a people
-  problem"; "a tour of duty, not a permanent life choice"; "freedom of speech is
-  a beautiful thing. But it's not freedom from consequences." (Do **not** confuse
-  with the hollow AI inflation — §5.)
-- **Anaphora / parallel build** [both]. Repeated openings stacking to a point:
-  "It's not enough to not-be racist. It's not enough to not-be sexist."; "There
-  are great stories to tell. There are failures to explore."; "After all we did
-  for you? After all we put up with?"
-- **The short-punch landing** [both]. A long build resolved by a 2–5 word hammer,
-  often its own paragraph: "They're coming for me." "Folks need to go." "Do
-  better." "It's not." "It feels good."
-- **The refrain / motif** [expressive]. A phrase repeated as a drumbeat across the
-  piece: "with intention"; "Do better"; "When they go low, we go high."
-- **Direct address** [expressive]. Speaking to the reader or an antagonist: "You
-  can't reason with the unreasonable."; "Let me remind you, internet troll…"
-- **Italics-for-voice** [expressive]. Italics to voice inner thoughts, quoted
-  speech, and sarcasm — his primary emphasis tool in prose (not bold, not caps,
-  except a rare one-line hammer).
-- **Borrowed aphorism** [both]. A pithy quote deployed to land a point: "Never
-  wrestle with a pig. You both get dirty, and the pig likes it."
-- **The value-stating rhetorical question** [both]: "Why?"; "Is this the person
-  you wanted to be when you grew up?"
+- **The anecdote/scene-led open** [all]. A concrete scene, often with a year:
+  "On June 3, 2014 we opened the doors of Turing… Day one teambuilding was to
+  build the furniture."; "Do you remember 2005? I do."
+- **Numbers-in-story** [all]. Evidence inside the sentence: "over 91% of graduates
+  are working, today, as professional software developers"; "$40K before… $70K…
+  $160K/year five years after."
+- **The reframe — "X isn't A, it's B" / "not A, but B"** [all]. A core signature,
+  encouraged: "adoption isn't a technology problem. It's a people problem." (Do
+  NOT confuse with the hollow AI inflation — §5.)
+- **Anaphora / parallel build** [all]: "Unless somebody said it was hard. Unless
+  they said I couldn't do it. Or it couldn't be done."; "It's not enough to
+  not-be racist. It's not enough to not-be sexist."
+- **The short-punch / deadpan landing** [all]. A long build resolved by a tiny
+  sentence, often funny: "Also, we write some code."; "I hated JSP."; "Now you
+  have my attention."
+- **The em-dash dismissal** [expressive/analytical]. Options knocked down in
+  sequence: "Being the biggest — who cares? Getting the most funding — no.
+  Catching headlines and awards — not interested."
+- **Diagnose → prescribe** [analytical]. Name the flaw, explain why, then a
+  concrete numbered fix: "The fix is simple:"; "It's a quick fix: allow students
+  … to defer their existing federal student loan payments."
+- **The confident prediction / challenge** [expressive/analytical]: "Look back two
+  years from now and you'll find that EQUIP was a great press release."
+- **Direct address & the value-stating rhetorical question** [expressive/analytical]:
+  "Why did we fall in love?"; "Why aren't jobs automatic after graduation?"
+- **The refrain / motif** [expressive]: "with intention"; "the freedom business";
+  "Do better."
+- **Italics-for-voice** [expressive]. Inner thoughts, quoted speech, sarcasm —
+  his primary emphasis tool in prose (not bold, not caps).
+- **Borrowed aphorism / imperative** [all]: "Never wrestle with a pig. You both
+  get dirty, and the pig likes it."; "Embrace the constraints."
 - **Phased emotional honesty** [expressive]. Narrating his own flaws and growth in
-  sequence ("Phase 0: Anger → Phase 3: Aftermath"); vulnerability as structure.
-- **Self-aware humor / self-deprecation** [both]: "and then, ok, we're a
-  bootcamp!"; "silly blog posts"; "Congrats, pig wrestler."; "Think of the
-  Beyhive, but a little nerdier."
-- **Mission / servant-leadership framing** [both]. People over process; the
-  recurring idea (and near-verbatim phrase) of building "the platform for their
-  genius"; the values-declaration bio sign-off ("I believe in leveraging your
-  power and privilege to disrupt the system").
+  sequence; vulnerability as structure.
+- **Self-aware humor / self-deprecation** [all]: "Don't put engineers in charge of
+  your marketing."; "silly blog posts."
+- **Mission / servant-leadership landing** [all]. People over process; "I work to
+  set people free."; "the platform for their genius"; a values-declaration close.
 
 ## 4. Rhythm
 
-- **Vary length hard; land on the short one.** Long build, short hammer. Read
-  every paragraph aloud.
-- **Fragments are a tool** [both]: "Ableist. Xenophobic." "Right? Right? No."
+- **Vary length hard; land on the short one.** Long build, tiny hammer. Read every
+  paragraph aloud.
+- **Fragments are a tool** [all]: "Ableist. Xenophobic." "Right? Right? No."
 - **One-line paragraphs** carry weight — let a single sentence stand alone.
 - **Anaphora sets a beat**, then break it so it doesn't sing-song.
-- **Final gate (§lint):** read it out loud; if a sentence sounds like an AI wrote
-  it, rewrite it.
+- **Final gate:** read it out loud; if a sentence sounds like an AI wrote it,
+  rewrite it (`lint-rules.md`).
 
 ## 5. Diction — reach for / kill
 
 **Reach for:** plain first-person verbs and concrete nouns — build, serve, figure
-it out, from scratch, mission, care, believe, craft, disrupt. Warmth comes from
-plain words used honestly.
+it out, from scratch, mission, care, believe, craft, free, steer, disrupt. Warmth
+comes from plain words used honestly.
 
-**Kill on sight (both registers):**
+**Kill on sight (all bands):**
 - **Corporate-speak:** synergy, wheelhouse, best-in-class, passionate about
   excellence, world-class, cutting-edge, move the needle, circle back.
 - **AI-slop:** delve, tapestry, realm, landscape, testament, underscore, boasts,
   utilize, myriad, plethora, robust (as filler), seamless.
-- **The hollow inflation** "it's not just X — it's a whole Y" used to sound
-  profound about nothing. Distinct from the earned reframe (§3): does "B" deliver
-  a specific correction (keep) or a vague upgrade in importance (kill)?
-- Throat-clearing, hedges ("honestly," "arguably," "somewhat"), empty
-  intensifiers ("very," "really," "incredibly").
+- **The hollow inflation** "it's not just X — it's a whole Y" that sounds profound
+  about nothing. Distinct from the earned reframe (§3): does "B" deliver a
+  specific correction (keep) or a vague upgrade in importance (kill)?
+- Throat-clearing, hedges ("honestly," "arguably," "somewhat"), empty intensifiers
+  ("very," "really," "incredibly").
 
-**Register-specific — do NOT blanket-ban:**
+**Band-specific — do NOT blanket-ban:**
 - **Exclamation marks, profanity, and "leverage"** are banned in the **formal**
-  register (`lint-rules.md`) but are **on-voice in the expressive register**
-  ("Let's get started!"; "This. Fucking. Asshole."; "leveraging your power and
-  privilege"). Judge by register, never strip them from a blog or opinion piece.
+  band (`lint-rules.md`), rare in the **analytical** band, and **on-voice in the
+  expressive band** ("Let's get started!"; "It was bullshit, right? Right?";
+  "leveraging your power and privilege"). Judge by band; never strip them from a
+  blog or manifesto.
 
 ## 6. Structure by medium
 
-- **Expressive essay (blog, opinion, manifesto).** Scene-led open → a build of
-  parallel claims and lived stories → real opinion, stated plainly → mission /
-  values landing. A refrain may thread it. Longer essays carry voicey section
-  headers (see §7). Emotional arc can *be* the structure (Anger → Aftermath).
-- **Formal persuasion (cover letter, application).** Flowing prose, no chrome:
-  scene-led open → numbered lived evidence → the opinion / stakes → tie to
-  mission → short warm close. `lint-rules.md` governs.
+- **Expressive essay (blog, manifesto, talk).** Scene-led open → a build of
+  parallel claims and lived stories → real opinion, stated plainly → mission
+  landing. A refrain may thread it; emotional arc can *be* the structure.
+- **Analytical essay / memo.** Thesis up front → the flaw named → why it fails →
+  numbered, concrete, costed fixes → a short "here's what matters" close. Jeff
+  often outlines first (Thesis / Opening / Body / Conclusion) then writes flowing
+  prose over that skeleton.
+- **Formal persuasion (cover letter, grant).** Flowing prose, no chrome (cover
+  letter) or required institutional sections (grant); scene or mission open →
+  numbered lived evidence → tie to mission → short close. `lint-rules.md` governs.
 - **Technical doc / README.** Structure is a feature: Summary → Evidence → Why it
   matters → Options → What we did; concrete numbers; "ruled out:" reasoning.
-- **Email.** Under-sampled. Provisional: open with the ask/answer, one screen,
-  end with the single next action.
+- **Email.** The one remaining gap — no verified sample yet. Provisional: open
+  with the ask/answer, one screen, end with the single next action.
 
-Do not import doc structure into narrative prose — that was the deprecated
-guide's central mistake.
+Do not import doc structure into narrative prose — v1's central mistake.
 
 ## 7. Formatting — the "looks"
 
 - **Short formal prose (cover letters): no chrome.** Paragraphs only. No headers,
-  bullets, bold, tables, or emoji.
-- **Expressive essays: voicey structure is on-voice.** Narrative section headers
-  ("Phase 0: Anger", "What would MO do?") — never generic ("Overview,"
-  "Conclusion"). **Italics** are the primary emphasis tool. A rare **one-line
-  bold hammer** is allowed ("**It feels good**."). Short bulleted lists appear for
-  genuinely enumerable items (need-to reasons, review attributes), but the spine
-  is prose.
+  bullets, bold, tables, emoji.
+- **Expressive & analytical essays: voicey structure is on-voice.** Narrative
+  section headers ("Steering, Better", "This Ain't No Router Rewrite") — never
+  generic ("Overview," "Conclusion"). **Italics** are the primary emphasis tool;
+  a rare one-line **bold** hammer is fine. Short numbered/bulleted lists appear
+  for genuinely enumerable items (the three fixes, discussion prompts), but the
+  spine is prose.
 - **Docs: format for the skim** — noun-phrase/question headers, short paragraphs,
   tables only for parallel data.
-- No ⚠ markers or bold inline labels as a system anywhere in prose — that's the
-  deprecated Claude aesthetic.
+- No ⚠ markers or bold inline labels as a system in prose — the deprecated
+  Claude aesthetic.
 
 ## 8. Audience & register
 
@@ -168,25 +177,25 @@ guide's central mistake.
   without condescending.
 - **Tailor concretely** — cite a specific detail from the real context, never
   boilerplate.
-- **Match the sign-off:** "Sincerely" (formal/edu/nonprofit) vs. "Thanks"
-  (tech/PBC/startup). Expressive pieces often close with a values-declaration bio.
+- **Match the sign-off:** "Sincerely" (formal/edu/nonprofit) vs "Thanks"
+  (tech/PBC/startup); expressive pieces often close on a values declaration.
 - **Lead with mission when the reader is mission-driven.**
-- **Pick the register for the room.** The expressive voice (profanity, raw
-  emotion) is for Jeff's own name and personal/opinion writing — not client email
-  or formal docs. Right register, right room.
+- **Pick the band for the room.** Profanity and raw emotion are for Jeff's own
+  name and personal/opinion writing — not a client email or a grant. Right band,
+  right room.
 
 ## 9. Terms of art
 
 Use the right term once, matched to the audience; define on first use only if the
-reader might not know it. Never jargon as decoration — given Jeff's plain,
-warm register, the bar for reaching past a common word is high. Domains:
-developer education, software, AI-native engineering, mission-driven leadership.
+reader might not know it. Never jargon as decoration — given Jeff's plain, warm
+register, the bar for reaching past a common word is high. Domains: developer
+education, software, AI-native engineering, mission-driven leadership.
 
 ## 10. Anti-patterns (kill these)
 
 - A thesis-statement opening where an anecdote belongs.
-- Applying formal-register lint to expressive writing (stripping exclamation,
-  profanity, italics, humor from a blog) — or vice versa.
+- Applying one band's rules to another (stripping an expressive piece's
+  exclamation/profanity/italics; or letting profanity into a grant).
 - Bulleted achievements/stats, ⚠ markers, bold inline labels, tables in narrative
   prose.
 - Corporate-speak (§5); the hollow "not just X" inflation.
@@ -196,15 +205,18 @@ developer education, software, AI-native engineering, mission-driven leadership.
 
 ## 11. Changelog (Perkins appends here)
 
-- 2026-07-16 (v3) — **Added the expressive register.** Folded in the two
-  "With Intention" Medium essays (pure pre-AI Jeff). Established the two-register
-  model (formal vs expressive) and scoped `lint-rules.md`'s no-exclamation /
-  no-profanity / no-"leverage" rules to the formal register only. Added signature
-  moves: refrain/motif, direct address, italics-for-voice, borrowed aphorism,
-  phased emotional honesty, one-line hammers. Nuanced formatting: expressive
-  essays carry voicey headers and italics.
-- 2026-07-16 (v2) — Re-grounded on `lint-rules.md` + cover letters after
-  discovering v1's source was machine-generated. Established narrative voice;
-  un-banned the reframe.
+- 2026-07-16 (v4) — **Corpus now robust and verbatim.** Folded in the Turing
+  Archive collection (*The Freedom Business*, the 2016 policy op-eds, *Adventures
+  on the Golden Path*) and the 2025 grant *Project Narrative*. Evolved the model
+  from two registers to a **three-band spectrum** (expressive → analytical →
+  formal); added the analytical band (diagnose→prescribe, "the fix is simple,"
+  confident-prediction). Added signature moves: em-dash dismissal, deadpan
+  landing, direct-address rhetorical-question open. Confirmed the formal register
+  persists in 2025 (no drift). Noted quoted readings in facilitation guides are
+  not Jeff's voice. Email remains the only gap.
+- 2026-07-16 (v3) — Added the expressive register from the "With Intention" blogs;
+  scoped lint-rules' no-exclamation/profanity rules to the formal register.
+- 2026-07-16 (v2) — Re-grounded on lint-rules + cover letters after v1's source
+  proved machine-generated; un-banned the reframe.
 - 2026-07-16 (v1, deprecated) — Derived partly from a machine-generated Doc;
-  structure-heavy aesthetic was Claude's, not Jeff's. Removed.
+  removed.

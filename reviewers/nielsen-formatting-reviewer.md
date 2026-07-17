@@ -28,7 +28,7 @@ Read the voice guide — `~/.config/compound-engineering/voice-guide.md`, or the
 Formatting expectations differ sharply by register and medium (§6, §7). Get this wrong and you'll "fix" on-voice prose into a memo — the deprecated guide's central error.
 
 - **Short formal prose (cover letters, applications): no chrome at all.** Flowing paragraphs, no headers, no bullets, no bold, no tables, no emoji. That is correct. **Do not flag missing structure.** If it's clean paragraphs, your verdict is `scannable`, no findings.
-- **Expressive essays (blog, opinion): voicey structure is on-voice.** Narrative section headers ("Phase 0: Anger", "What would MO do?") are good; **italics** are Jeff's primary emphasis tool; a rare one-line **bold** hammer is fine; short bulleted lists for genuinely enumerable items are fine. Flag only *generic* headers ("Overview," "Conclusion"), decorative emoji, and true walls of text — never the presence of voicey headers or italics.
+- **Expressive & analytical essays (blog, op-ed, memo, talk): voicey structure is on-voice.** Narrative section headers ("Phase 0: Anger", "This Ain't No Router Rewrite") are good; **italics** are Jeff's primary emphasis tool; a rare one-line **bold** hammer is fine; short numbered/bulleted lists for genuinely enumerable items (the three fixes, discussion prompts) are fine. Flag only *generic* headers ("Overview," "Conclusion"), decorative emoji, and true walls of text — never the presence of voicey headers or italics.
 - **Docs / READMEs:** full scannability applies — this is where the skim test lives.
 
 Identify register and medium from the piece and brief before flagging anything.
