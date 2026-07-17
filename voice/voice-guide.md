@@ -20,8 +20,12 @@ Grounded in a robust, verbatim, multi-register corpus (high confidence):
 - **Technical-doc:** `server-admin/docs/miren-feedback.md`.
 
 Sources are reproduced-as-written (typos and draft artifacts preserved), so they
-are the real thing, not paraphrase. **Caveat:** facilitation guides quote other
-authors (e.g. a Chad Fowler excerpt) — quoted readings are not Jeff's voice.
+are the real thing, not paraphrase. **Caveats on what NOT to mine:** facilitation
+guides quote other authors (e.g. a Chad Fowler excerpt); and most "State of
+Turing" addresses (2020–2022 series) are **speaking-notes / run-of-show** —
+bullet outlines and co-presenter Q&A scripts, not finished prose. Mine only their
+real "Talk"/prose sections. The 2022 prose confirms the expressive register with
+**no drift** since 2019 (same scarcity/abundance argument, same moves).
 **Deprecated:** v1 was derived partly from a machine-generated Google Doc; its
 table/⚠/bold-label aesthetic was Claude's and has been removed.
 
