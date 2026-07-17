@@ -27,6 +27,20 @@ Custom reviewer personas, orchestrator definitions, and user personas for the [C
 | Jim Weirich (Git) | Git hygiene, commits as storytelling |
 | Abby (Synthesis) | Cross-reviewer synthesis PM, prioritizes findings |
 
+### Writing Reviewers
+
+The seven-voice panel for prose, run by the **Perkins** orchestrator. Each owns one dimension of Jeff's voice and cites the [voice guide](voice/voice-guide.md) by section. Dispatched by the `ce:prose-review` skill (selected via `category: writing`).
+
+| Reviewer | Lens | Owns (voice guide) |
+|----------|------|--------------------|
+| Stephen King | Voice & tone — does it sound like Jeff? | §1–3, §5 reach-for |
+| Gary Provost | Rhythm & cadence — the read-aloud test | §4 |
+| George Orwell | Concision & AI-slop — cut filler, kill machine tells | §2.2, §5 kill-list, §10 |
+| Barbara Minto | Structure & flow — answer-first, one idea per section | §6, §2.1 |
+| Jakob Nielsen | Formatting — scannability, the "looks" | §7 |
+| Ann Handley | Audience — will it land with the reader? | §9, §1 |
+| Bryan Garner | Vocabulary — the right term of art | §9, §5 precision |
+
 ## Orchestrators
 
 Orchestrators define *how* to run a project — which phases to execute, which reviewers to prioritize, when to skip steps, and how to synthesize findings.
@@ -39,6 +53,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 | **Max** | The Madman | Spike fast, minimal review, maximum velocity |
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
 | **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
+| **Perkins** | The Editor | Writing workflow — develop → outline → draft → seven-voice review → compound into the voice guide |
 | **Ted** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
 | **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 
@@ -63,6 +78,23 @@ User personas simulate distinct user archetypes to scenario-test features from r
 | **Vera** | The Subject-Matter Expert | Oversimplification, broken analogies, stale references, missed nuance |
 | **Pete** | The Newcomer | Unexplained jargon, missing bridges, concepts used before defined |
 | **Dana** | The Decision-Maker | Vague asks, missing why-now, no differentiation, no Monday-morning plan |
+
+## Voice Guide
+
+`voice/voice-guide.md` is the canonical record of how Jeff writes — the ground truth every Writing Reviewer cites and the Perkins workflow drafts against. It is a **living** document: Perkins's compound phase appends a new rule every time a draft correction reveals a durable preference.
+
+- **Canonical (version-controlled):** `voice/voice-guide.md` in this repo.
+- **Live (read + written at runtime):** `~/.config/compound-engineering/voice-guide.md`, seeded from the canonical copy if absent — this is the copy Perkins updates.
+- **Project override:** a repo-local `docs/writing/voice-guide.md` wins for that project.
+
+Seed the live copy alongside the `*-sources.yaml` configs:
+
+```bash
+mkdir -p ~/.config/compound-engineering
+cp voice/voice-guide.md ~/.config/compound-engineering/voice-guide.md   # seed-if-absent
+```
+
+The Perkins workflow also requires the `ce:write` and `ce:prose-review` skills from the [compound-engineering-plugin](https://github.com/JumpstartLab/compound-engineering-plugin) fork.
 
 ## Usage
 
