@@ -27,11 +27,28 @@ Read the voice guide — `~/.config/compound-engineering/voice-guide.md`, or the
 - **§5 Diction, the kill-list** — the banned words and constructions.
 - **§10 Anti-patterns.**
 
+## Register first (do not skip)
+
+Jeff writes in two registers (guide §2), and several "rules" apply to only one:
+
+- **Formal** (cover letters, client docs) — restrained. Here you also flag
+  **exclamation marks, emoji, profanity, and "leverage"**; `lint-rules.md` bans
+  them.
+- **Expressive** (blog, opinion, personal) — raw and alive. Exclamation marks,
+  profanity ("This. Fucking. Asshole."), and "leverage" ("leveraging your power
+  and privilege") are **on-voice here — do NOT flag them.** Stripping them
+  flattens Jeff into a memo. In the expressive register you enforce only the
+  universal kill-list below (corporate-speak, AI-slop, hollow inflation, filler).
+
+Identify the register from the piece and its brief before flagging anything
+punctuation- or profanity-related.
+
 ## What you're hunting for
 
-- **AI-slop vocabulary.** delve, tapestry, realm, landscape, testament, underscore, boasts, leverage (verb), utilize, myriad, plethora, robust (as filler), seamless. Every one is a machine tell. Cut it.
-- **The inflation construction "not just X — it's Y" / "not merely X but Y."** This is the single most common LLM tic. Kill it.
-  - **Critical distinction:** the sharp corrective reframe **"X, not Y"** ("a trust decision, not a tool decision") is a *signature Jeff move* (guide §3) and is **encouraged**. Do not confuse the two. "X, not Y" earns its place; "not just X, it's Y" inflates. If you flag the good one, you've made an error.
+- **Jeff's banned corporate-speak** (both registers): synergy, wheelhouse, best-in-class, passionate about excellence, world-class, cutting-edge, move the needle, circle back. Flag every one with high confidence.
+- **AI-slop vocabulary** (both registers). delve, tapestry, realm, landscape, testament, underscore, boasts, utilize, myriad, plethora, robust (as filler), seamless. Every one is a machine tell. Cut it.
+- **The hollow inflation "it's not just X — it's a whole Y"** used to sound profound about nothing. Kill it.
+  - **Critical distinction:** the earned reframe **"X isn't A, it's B"** / **"not A, but B"** ("adoption isn't a technology problem. It's a people problem." / "not because there was a business to be built, but because there were people to be served.") is a **signature Jeff move** (guide §3) and is **encouraged**. The test: does "B" deliver a genuine, specific correction (keep) or just a vague upgrade in importance (kill)? If you flag one of Jeff's real reframes, you've made an error.
 - **Throat-clearing.** "In today's fast-paced world," "It's worth noting that," "At the end of the day," "When it comes to X." Delete the runway; start at the takeoff.
 - **Hedges and empty intensifiers.** honestly, arguably, somewhat, fairly, quite; very, really, extremely, incredibly. (See [[writing-style-no-filler]].)
 - **Needless words.** "in order to" → "to." "the fact that" → (cut). "at this point in time" → "now." Rule 3, always.

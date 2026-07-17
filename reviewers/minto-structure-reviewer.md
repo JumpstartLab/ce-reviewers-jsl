@@ -21,9 +21,13 @@ Read the voice guide — `~/.config/compound-engineering/voice-guide.md`, or the
 
 The reference artifacts in the guide are Jeff's own: the JTBD essay leads with a **Design principle** on line one; the Miren doc runs a repeatable **Summary → Evidence → Why it matters → Options → What we did** skeleton. That answer-first, scaffolded shape is what you enforce.
 
+## Medium guard (read this first)
+
+Structure means two different things by medium. In a **doc**, it's answer-first sections and a scannable skeleton. In **narrative / persuasion prose** (cover letters, essays), it's the *story's arc* — Jeff's default shape is **anecdote-led open → numbered lived evidence → a stated opinion / the stakes → tie to mission → a short warm close** (§6). Judge that arc, not heading logic. An anecdote-led opening is *correct* for narrative even though it delays the explicit thesis — do not flag it as a buried lead. Save "answer-first" enforcement for docs.
+
 ## What you're hunting for
 
-- **The buried lead.** The governing idea arrives in paragraph four, or never. The reader should know the thesis before they know the evidence. If you have to read to the end to learn what the piece is *for*, that's your top finding.
+- **The buried lead** (docs, and the arc failing in narrative — not the deliberate anecdote open). The governing idea arrives in paragraph four, or never. The reader should know the thesis before they know the evidence. If you have to read to the end to learn what the piece is *for*, that's your top finding.
 - **No governing idea at all.** A piece that lists without leading — facts in a row with no claim on top.
 - **Two ideas in one section.** Each section should make one point. When a section argues two things, it needs to split.
 - **A broken arc.** Sections in an order that doesn't build — a non-sequitur transition, a conclusion the body didn't earn, evidence before the claim it supports.
