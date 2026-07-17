@@ -166,7 +166,10 @@ Do not import doc structure into narrative prose — v1's central mistake.
   bullets, bold, tables, emoji.
 - **Expressive & analytical essays: voicey structure is on-voice.** Narrative
   section headers ("Steering, Better", "This Ain't No Router Rewrite") — never
-  generic ("Overview," "Conclusion"). **Italics** are the primary emphasis tool;
+  generic ("Overview," "Conclusion"), and **Title-Cased, not sentence case**
+  ("The Part That Compounds," not "The part that compounds"). Jeff's finished
+  essays headline-case their section titles. **Italics** are the primary
+  emphasis tool;
   a rare one-line **bold** hammer is fine. Short numbered/bulleted lists appear
   for genuinely enumerable items (the three fixes, discussion prompts), but the
   spine is prose.
@@ -209,6 +212,9 @@ education, software, AI-native engineering, mission-driven leadership.
 
 ## 11. Changelog (Perkins appends here)
 
+- 2026-07-16 (v4.1) — Compound (from a live Jeff correction): §7 now requires
+  **Title-Cased** section headers in essays, not sentence case. Surfaced while
+  drafting the first two JSL blog posts.
 - 2026-07-16 (v4) — **Corpus now robust and verbatim.** Folded in the Turing
   Archive collection (*The Freedom Business*, the 2016 policy op-eds, *Adventures
   on the Golden Path*) and the 2025 grant *Project Narrative*. Evolved the model
