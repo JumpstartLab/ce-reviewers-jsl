@@ -95,7 +95,11 @@ Reach for these. Tags: **[all]**, or the band(s) where the move lives.
 - **Direct address & the value-stating rhetorical question** [expressive/analytical]:
   "Why did we fall in love?"; "Why aren't jobs automatic after graduation?"
 - **The refrain / motif** [expressive]: "with intention"; "the freedom business";
-  "Do better."
+  "Do better." **Expressive-band only.** Do not carry a coined, reused label into
+  analytical/formal/technical writing, even to flag that items are related (e.g.
+  tagging bugs with a repeated tag-line like "the unguarded-sibling shape"). Outside
+  the expressive band, use plain cross-reference — "same root cause as," "same shape
+  as" — not a motif.
 - **Italics-for-voice** [expressive]. Inner thoughts, quoted speech, sarcasm —
   his primary emphasis tool in prose (not bold, not caps).
 - **Borrowed aphorism / imperative** [all]: "Never wrestle with a pig. You both
@@ -231,6 +235,13 @@ education, software, AI-native engineering, mission-driven leadership.
 
 ## 11. Changelog (Perkins appends here)
 
+- 2026-07-18 (v4.3) — Compound (from the Syyclops authz-audit issue-writing run):
+  §3 now marks the **refrain/motif as expressive-band only** — a coined, reused label
+  must not carry into analytical/formal/technical writing, even to flag related items;
+  use plain cross-reference instead. Surfaced when the seven-voice panel (King and
+  Orwell both) flagged a coined tag — "the unguarded-sibling shape" — reused as the
+  closing beat of two bug reports: a manufactured clincher in a band that should end
+  flat. Extends the v4.2 rule about not landing every beat on a button.
 - 2026-07-17 (v4.2) — Compound (live Jeff correction, Hindsight getting-started
   draft): added the **decorative symmetric construction** to §5's kill-list —
   the matching-grammar rule-of-three, the tidy "not A, but B" button, rhyming
