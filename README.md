@@ -27,6 +27,19 @@ Custom reviewer personas, orchestrator definitions, and user personas for the [C
 | Jim Weirich (Git) | Git hygiene, commits as storytelling |
 | Abby (Synthesis) | Cross-reviewer synthesis PM, prioritizes findings |
 
+### Quality Crew
+
+The six-lens panel for deep software-quality review, run by the **Josh** orchestrator. Each lens owns a distinct evidence type, carries an explicit do-not-flag exclusion list, and tags findings by evidence tier. Design research in [docs/research/technical-quality-review/](docs/research/technical-quality-review/).
+
+| Reviewer | Lens |
+|----------|------|
+| Gerard Meszaros | Test mechanics — assertion strength, test smells, mock discipline, flake precursors |
+| John Ousterhout | Abstraction depth — deep vs. shallow modules, wrong abstractions, "don't abstract" calls |
+| Hyrum Wright | Contracts — breaking changes, public surface, error contracts, validation division |
+| Jorge Manrubia | Framework fit — idiom, reinvented primitives, monkey-patch/private-API coupling |
+| Hillel Wayne | Comments & docs — why-vs-what, interface comments, doc-code drift |
+| Casey Muratori | Performance shape — N+1s, unbounded queries, migration locks, retry storms |
+
 ### Writing Reviewers
 
 The seven-voice panel for prose, run by the **Perkins** orchestrator. Each owns one dimension of Jeff's voice and cites the [voice guide](voice/voice-guide.md) by section. Dispatched by the `ce:prose-review` skill (selected via `category: writing`).
@@ -49,6 +62,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 |---|---|---|
 | **Edith** | The Story Architect | Scenario-first, personas as multiplexed lenses, phase-don't-cut plan review |
 | **Erin** | The Enterprise Project Manager | Full process with judgment calls, compounds learnings |
+| **Josh** | The Craftsman | Deep quality review — six-lens crew, adversarial verify, approval-biased synthesis |
 | **LFG** | Standard Pipeline | No shortcuts — plan, work, review, ship |
 | **Max** | The Madman | Spike fast, minimal review, maximum velocity |
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
