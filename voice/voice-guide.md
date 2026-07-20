@@ -231,10 +231,21 @@ education, software, AI-native engineering, mission-driven leadership.
 - Corporate-speak (§5); the hollow "not just X" inflation.
 - Describing without ever taking a position.
 - Adjective inflation standing in for a concrete number or example.
+- The aggregate-report hedge — opening a bundled or multi-finding piece with "no single item is
+  serious, but together…" / "none alone is critical, but collectively…". It's the tell of generic
+  scanner/pentest output: a severity apology where a claim belongs. Lead with the concrete failures,
+  then say they're grouped. (Formal/technical band, but the instinct — describe rather than commit —
+  is this section's core.)
 - Anything that "sounds like an AI wrote it."
 
 ## 11. Changelog (Perkins appends here)
 
+- 2026-07-20 (v4.4) — Compound (from the Syyclops auth-audit issue-writing run): §10 now names the
+  **aggregate-report hedge** — opening a bundled or multi-finding piece with "no single finding is
+  serious, but together…". Surfaced when the seven-voice panel (King, with Minto, Handley, and
+  Provost) flagged two bundled security issues that opened with that pentest-scanner tic; both were
+  rewritten to lead with the concrete failures. Extends the §1 "state a real opinion" and §10
+  "describing without taking a position" rules to the specific opener of aggregate/bundled writing.
 - 2026-07-18 (v4.3) — Compound (from the Syyclops authz-audit issue-writing run):
   §3 now marks the **refrain/motif as expressive-band only** — a coined, reused label
   must not carry into analytical/formal/technical writing, even to flag related items;
