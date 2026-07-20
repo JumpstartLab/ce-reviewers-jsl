@@ -125,3 +125,24 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (2 of 6 candidates refuted — both convention-without-victim).**
+- A convention citation (PEP 8, framework docs) is NOT sufficient for warning
+  severity. To clear warning you must name the concrete failure path — who
+  breaks, when, how it's noticed. Correct hand-rolled validation that a
+  framework primitive could replace is suggestion-grade unless the primitive
+  fixes a real gap (and check where consumer schemas actually derive from
+  before claiming schema-documentation value).
+- The private-API standing check translated perfectly to Python (underscore
+  attributes of third-party objects; deep non-exported submodule imports) and
+  found the run's best framework finding — keep it standing on every stack.
+  Verify "no public equivalent exists" against the INSTALLED package, and
+  don't call the break "silent" without tracing where it would surface
+  (AttributeError at startup is loud).
+- Hand-maintained enforcement artifacts (test allowlists, expected-count
+  literals) drift fast — flag them and prefer fixes that DERIVE the list
+  from the source of truth at test time.
+- On stacks with cultural rather than doctrinal canon, framework docs stand
+  in for Doctrine and repo-local precedent carries tier-3 weight.

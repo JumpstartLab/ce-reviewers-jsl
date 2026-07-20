@@ -121,3 +121,25 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (all 5 candidates confirmed; both audit blockings were yours).**
+- Standing check earned: **sibling write paths must share one concurrency
+  contract.** When one mutation route has an optimistic-concurrency guard,
+  every other route that writes the same resource (including its MCP/tool
+  twin) either carries the same guard or documents why not. Silently
+  ignoring a guard param the sibling honors is the worst variant.
+- Standing check earned: **authority-change lifecycle.** When access is
+  granted/revoked/expired, trace every long-lived channel already open under
+  the old authority (SSE, WebSocket, stream, session, cached token): does
+  revocation reach it, and within what window? Docs claiming "immediate"
+  revocation make the gap a doc-truth finding too.
+- First-person consumer evidence: on agent-native services, check whether
+  the session you are running in already consumes the surface under review
+  (MCP tool lists, fleet configs). "Who consumes this" can be answered at
+  tier-1 by looking at your own toolbox.
+- Multi-transport apps have per-transport error contracts; enumerate each
+  transport's error shape before claiming one contract. RFC-conventional
+  shapes consumed by protocol libraries (not body-parsers) rate nit, not
+  warning.

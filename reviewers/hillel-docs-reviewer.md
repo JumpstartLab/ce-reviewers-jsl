@@ -122,3 +122,23 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (4 of 6 confirmed; 1 refuted; blockings demoted).**
+- New standing category: **tool/route inventories as runtime contracts.**
+  On agent-native services, a doc that enumerates MCP tools or API routes is
+  read by LLM consumers to decide what they can do. Diff every enumerated
+  list and count against the actual registry, and when one has drifted more
+  than once, recommend deriving or test-guarding it, not just correcting it.
+- Severity calibration: docs-drift is blocking only when no self-correcting
+  mechanism exists. If the protocol hands consumers the true inventory at
+  runtime (MCP tools/list), drift is warning-grade.
+- Do-not-flag extension: sections that scope themselves historically
+  ("Non-goals (MVP)", "Later, not MVP", a dated Decision header) are records
+  of intent, not live claims — a fulfilled deferral is not drift. Check
+  whether a Status/see-also elsewhere already corrects the record before
+  calling a document misleading. Flag only genuinely unmarked stale lines.
+- Getting-started paths outrank reference accuracy: docs steering users to a
+  demoted auth flow (while the recommended one goes unmentioned) is a
+  higher-value finding than any single wrong table row.

@@ -122,3 +122,25 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (2 of 5 candidates refuted — both severity-inflation).**
+- Before pricing an unbounded query or collection endpoint, verify with your
+  own eyes (a) which columns the SELECT actually returns — a metadata-only
+  projection changes the cost by orders of magnitude — and (b) whether a
+  cache, coalescing layer, or upstream scope already bounds the path. Both
+  refutations were real shapes priced for the wrong payload/scale.
+- Per-call HTTP-client construction is only worth flagging when the call
+  frequency would keep pooled connections inside their keepalive window;
+  sporadic expensive calls make the handshake noise.
+- Name the growth axis explicitly (per-document time, org size, agent call
+  rate) — severity follows the axis, not the shape. Agent callers are a real
+  high-frequency axis on agent-native services.
+- Client-side fan-out (N browser requests from one page load) reproduces
+  chatty-I/O costs without a server loop — your Rails examples lack this
+  vocabulary; translate rather than skip. Phrase as a question bounded by
+  actual collection size.
+- SQLite deployments: concurrency posture (journal_mode, busy_timeout) is a
+  legitimate shape question with no ORM/Postgres analogue; check PRAGMAs
+  directly, and phrase as a question unless load evidence exists.
