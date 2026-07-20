@@ -274,3 +274,34 @@ review-preferences:
       nelly: |
         Anything quality-adjacent that smells like security or
         data-integrity risk — route it, don't duplicate Cass.
+
+## Run log (calibration the phases lean on)
+
+- **2026-07-17 Launcher (Rails)**: 11/11 candidates confirmed, 0 refuted.
+- **2026-07-18 Kondo (FastAPI/MCP)**: 25 candidates → 15 confirmed, 5
+  refuted (~20% finder false-positive), 2 held as questions, 2 leave-alones.
+  Both blocking candidates demoted to warning on verification. Refutations
+  clustered in two patterns, now encoded in the personas' field notes:
+  severity-inflation at small scale (muratori) and convention-citation
+  without a failure path (manrubia). Lesson: Launcher's 100% was the
+  outlier — the adversarial verify pass is load-bearing, not ceremony.
+
+Operational refinements proven in run 2:
+
+- Refuters may be grouped by area (one refuter, 3–5 related candidates)
+  when per-candidate spawning is impractical — independence is preserved
+  because the refuter still never sees the finder's reasoning. Instruct
+  refuters to EXECUTE reproductions where cheap (TestClient scenarios,
+  installed-package introspection), and to judge severity against the
+  app's actual scale, not the abstract shape.
+- Severity demotions are verify-phase output too: a "blocking" docs-drift
+  finding drops to warning when a protocol-level mechanism self-corrects
+  consumers at runtime; concurrency clobbers drop when a snapshot/versioning
+  layer bounds the loss and the sibling guard is itself opt-in.
+- Cross-cutting finding classes that no single lens owns (in run 2:
+  authority-change lifecycle — what happens to open streams/sessions when a
+  grant is revoked) get resolved as a standing check added to the closest
+  persona (hyrum), not a new persona, until at least three runs demand more.
+- Personas carry Rails-flavored examples; the context pack's one-line stack
+  note ("translate the principle, not the syntax") was sufficient — ask
+  each reviewer for lens-fit notes in their output and harvest them here.

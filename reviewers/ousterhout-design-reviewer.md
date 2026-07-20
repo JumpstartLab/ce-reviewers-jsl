@@ -129,3 +129,24 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (2 warnings confirmed incl. one already-forked duplication; leave-alones held).**
+- Duplication of a DECISION is the finding; duplication of code may be
+  legitimate. Count only sites that could share one implementation (a SQL
+  twin that binds a Python-computed value doesn't excuse the Python copies).
+  The strongest evidence is drift that has already begun — hunt for one
+  call site diverging (a missing normalization, a skipped guard) before
+  writing the claim.
+- Interface depth isn't line count: a 2-line forwarding layer whose
+  docstrings are the contract an LLM caller reads is a deep module. Check
+  what the interface IS (for MCP tools: the docstring) before calling a
+  layer shallow.
+- On FastAPI-style stacks the fat-controller debate mostly dissolves;
+  the live question is which FILE owns a policy decision — churn-weight it:
+  policy living in the repo's hottest file is worth a relocation note
+  (usually nit unless drift is observed).
+- When moving a shared helper, mind the dependency arrow: a data-layer
+  module importing the web layer to get a pure function is the wrong
+  direction — put the leaf function in the leaf.

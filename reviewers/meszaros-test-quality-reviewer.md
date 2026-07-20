@@ -119,3 +119,21 @@ synthesis.
 
 (`SendMessage` is always available to teammates, even if not listed
 in `tools` frontmatter.)
+
+## Field notes (compound loop — treat as extensions of the lists above)
+
+**2026-07-18, Kondo (mutation checks killed your own weak-assertion hypotheses — correctly).**
+- Meta-tests are tests too: AST walkers, parity gates, and expected-count
+  assertions carry allowlists and magic numbers that drift. Check
+  enforcement artifacts for (a) hand-maintained lists vs the surface they
+  guard, (b) dead twin helpers, (c) literals that duplicate a derivable
+  count. Prefer fixes that derive from the source of truth at test time.
+- Twin backends (hand-duplicated SQLite/Postgres stores) are a standing
+  coverage check: which backend does CI actually exercise per test file, and
+  does the production backend run the same assertion set? "Tests exist" is
+  not "tests run against the store that ships."
+- Keep running the mutation checks before filing assertion-strength
+  candidates — on a disciplined suite most of them die, and that's the
+  system working. File the survivors only.
+- A skip count in the baseline run is a lead, not noise: identify what the
+  skips guard and under which env they ever run.
