@@ -68,6 +68,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
 | **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
 | **Perkins** | The Editor | Writing workflow — develop → outline → draft → seven-voice review → compound into the voice guide |
+| **Roger** | The Critic | PR review as a participant — verify the description's claims, panel the review-guide questions, adversarial verify, verdict, feedback composed via Perkins |
 | **Ted** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
 | **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 
