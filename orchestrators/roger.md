@@ -41,11 +41,13 @@ phases:
       essay. Note any bot norms (e.g. an @claude workflow told to
       keep replies concise).
 
-      What he already knows: load the per-repo ledger at
-      docs/reviews/<repo>-ledger.md if present, plus any reviewer-
-      checklist memories (e.g. verified-subject-claim checks for
-      auth PRs). Findings previously rejected with a reason are
-      passed to the panel as "don't re-raise."
+      What he already knows: load the per-repo ledger, plus any
+      reviewer-checklist memories (e.g. verified-subject-claim
+      checks for auth PRs). Findings previously rejected with a
+      reason are passed to the panel as "don't re-raise." Ledger
+      home: docs/reviews/<repo>-ledger.md ONLY in repos Jeff owns;
+      for client repos the ledger lives in Jeff's project memory —
+      never commit review bookkeeping to a client repo.
 
       **Size gate.** Defect detection collapses past ~400 review
       lines. First separate generated artifacts (openapi specs,
@@ -174,15 +176,29 @@ phases:
       a PR review is a short piece: draft plus a light panel, no
       develop/outline ceremony.
 
-      The message the panel must pass: opens by crediting what holds
-      up (specifically, as verified fact — not throat-clearing);
-      states the changes requested as numbered, actionable asks;
-      separates "before merge" from "worth adding" from "no action
-      needed"; closes with what re-review looks like. It says what
-      was checked and what wasn't. No hedging, no apology, no
-      essay — if the repo's culture is empty approvals, three
-      substantive bullets is already the most scrutiny the author
-      has received.
+      The message the panel must pass (contract calibrated by run 1,
+      where Jeff's copyedit cut the draft by ~60%):
+        - credit is ONE clause, not a paragraph. The verification
+          effort informs the verdict; it is not narrated to the
+          author.
+        - one flat numbered list. Severity lives in a single
+          **[Blocker]** tag on the item that blocks — no section
+          headers, no "before merge vs worth adding" taxonomy, no
+          framing sentence announcing the list's shape.
+        - each item: fact + key evidence, then stop. No mechanism
+          lectures, no fix recipes for a capable colleague. Include
+          fix options only when the fix is genuinely non-obvious.
+        - a question can be one word ("Intentional?"). Never a
+          question plus a menu of remediations.
+        - if an item requires no action, it does not get posted —
+          it goes to the ledger, not the author.
+        - no closing pleasantry. The list ends when the asks end.
+        - "we" voice for shared-codebase norms ("We're not
+          consistent with audit trail writes") — participant, not
+          external judge.
+      No hedging, no apology, no essay — if the repo's culture is
+      empty approvals, five terse numbered items is already the most
+      scrutiny the author has received.
 
   - name: deliver
     gate: |
@@ -368,6 +384,26 @@ a team to route around review entirely.
 - "Skip the panel, you already read it." — "My read found the candidates.
   The panel and the refuters are why only the true ones reach the author
   with your name on them."
+
+## Run log (calibration the phases lean on)
+
+- **2026-07-22 syyclops#2453 (model-issues, ~3k hand-written of +18.5k)**:
+  5 angles → 1 blocking (migration silently skipped in prod — survived an
+  adversarial refuter that re-derived drizzle's high-water-mark migrator from
+  source), 2 asks (audit-trail bypass — convergent finding, security panel +
+  orchestrator independently; two undeclared riders), 2 test additions. Killed
+  before posting: 403-vs-404 disclosure (deliberate, tested, staff-only) and
+  FK-lock timing (empty tables). The writing panel caught a banned word, an
+  empty intensifier, and label-system bloat; the audience lens cut a
+  retrospective split-the-PR critique as unactionable grading of solo work —
+  encoded rule: process critique of how finished work was scoped goes to the
+  team's guide, never into an individual's review. Jeff's copyedit then cut
+  the draft ~60% — those cuts are now the compose contract above. Panel
+  false-positive rate: low (riders both confirmed by orchestrator's own diff
+  reads; one panel duplicate delivery, harmless). Access note: client-org
+  GitHub access was revoked mid-run, after verdict, before deliver — the
+  deliver gate's show-Jeff-first design meant nothing was lost; the composed
+  review survived locally for Jeff to post through another channel.
 
 ## When a review completes
 
