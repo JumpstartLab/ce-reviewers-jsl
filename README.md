@@ -60,17 +60,23 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 
 | Orchestrator | Archetype | Style |
 |---|---|---|
+| **Angie** | The Auditor | Focused review passes on existing code — test suites, features, architecture, UX — into a ranked improvement plan |
+| **Cass** | The Breach-Minded Auditor | Security audits — trust-boundary map, threat model, section crews, verify-before-report, CVSS register, handoff to Nelly |
+| **Courtney** | The Creative | Divergent ideation grounded in research, reality-checked pitches; greenlit ideas feed Erin |
 | **Edith** | The Story Architect | Scenario-first, personas as multiplexed lenses, phase-don't-cut plan review |
 | **Erin** | The Enterprise Project Manager | Full process with judgment calls, compounds learnings |
+| **Harriet** | The Evidence-First Investigator | Administrative/business evidence hunts — one hunter per system, triangulate by independent sources, no estimates |
 | **Josh** | The Craftsman | Deep quality review — six-lens crew, adversarial verify, approval-biased synthesis |
 | **LFG** | Standard Pipeline | No shortcuts — plan, work, review, ship |
+| **Linda** | The Workshop Builder | Lesson creation from a learning outcome — minute-by-minute plan, materials, dry-run, audience-persona review |
 | **Max** | The Madman | Spike fast, minimal review, maximum velocity |
 | **Nelly** | Nervous Nelly | Security-first, scalability-paranoid, thorough |
 | **Oscar** | The Open Source Contributor | Public API lens, docs, naming, first impressions |
 | **Perkins** | The Editor | Writing workflow — develop → outline → draft → seven-voice review → compound into the voice guide |
+| **Rachel** | The Debriefer | Post-delivery workshop retrospective — what surprised, what broke, what's reusable; proposes v2 changes |
+| **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 | **Roger** | The Critic | PR review as a participant — verify the description's claims, panel the review-guide questions, adversarial verify, verdict, feedback composed via Perkins |
 | **Ted** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
-| **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 
 ## User Personas
 
