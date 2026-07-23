@@ -265,20 +265,44 @@ content. The five most diagnostic numbers for "sounds like Jeff":
 | em dashes per 1k words | 3.6 | 11.9 |
 | parentheses per 1k words | 6.0 | 1.3 |
 
-Test a draft with `bin/stylometry <draft.md>` in the longhand repo; large
-deviations on these five are a fail even when the panel passes the prose.
+The numbers above are the all-register aggregate; the fingerprint varies hard
+by band (technical Jeff is paren-heavy and question-free; analytical is the
+opposite), so lint against the register, not the average.
+
+**These artifacts are served live from Rotunda** (rotunda.jumpstartlab.com/mcp,
+the JSL MCP door). Prefer the served copies to any file on disk — box-local
+copies drift:
+
+- `voice_guide` — this guide, canonical and current. Fetch it at the start of
+  any writing task; the local plugin copy may be stale.
+- `voice_exemplars(register)` — 2–4 matched model-vs-Jeff pairs to inject into
+  the drafting context; write like the Jeff side of each pair. Private
+  excerpts: quote into prompts, never into public files.
+- `voice_lint(draft, register)` — stylometric gate scored against Jeff's
+  per-register baseline. Run on every near-final draft. `fail` (3+ AI-ward
+  flags) means restructure — shorter sentences and paragraphs, more questions,
+  the register's punctuation habits — not word swaps. `borderline` (2) means
+  look at the flagged metrics.
+- After a guide change merges or the longhand pipeline reruns, republish with
+  `voice_put`.
+
+Fallback with no Rotunda connection: `/workspace/longhand` on tractor has the
+same exemplars (`exemplars/`) and lint (`bin/stylometry`).
 The discriminator result to remember: single paragraphs of model prose pass
 as Jeff (50% blind detection), whole documents never do (100%) — the tells
 are architecture (sentence mix, paragraph pacing, endings, transitions), so
 review at the document level, not the sentence level.
 
-**Exemplar injection (drafting rule).** When drafting on a machine where
-`/workspace/longhand/exemplars/<register>.md` exists, pull 2–4 matched pairs
-for the piece's register into the drafting context and write like the Jeff
-side of each pair. The pairs are excerpts from private documents — quote them
-into prompts, never into public files.
-
 ## 12. Changelog (Perkins appends here)
+
+- 2026-07-23 (v4.7) — **Voice system served from Rotunda.** The guide,
+  exemplar pairs, per-register stylometric baselines, and the lint gate now
+  live behind rotunda.jumpstartlab.com/mcp (voice_guide / voice_exemplars /
+  voice_lint / voice_put) — one canonical copy for every machine and session,
+  replacing box-local files as the primary path. §11 rewritten accordingly.
+  Lint is direction-aware (deviation away from the AI direction doesn't flag)
+  and per-register (validated on the longhand corpus: Jeff originals 6 pass /
+  2 borderline / 0 fail; model reconstructions 0 / 1 / 4).
 
 - 2026-07-23 (v4.6) — **Longhand pilot: empirical fingerprint.** Built
   `JumpstartLab/longhand` (private): denatured 9 verbatim Jeff docs to
