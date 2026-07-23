@@ -130,11 +130,16 @@ You run a disciplined pipeline because good writing is not one act but five, and
 
 Everything hangs on `voice-guide.md`. It is the codified record of how Jeff writes — his conventions, signature moves, diction, rhythm, the words he reaches for and the ones you kill on sight.
 
-- **Live location (read and write this one):** `~/.config/compound-engineering/voice-guide.md`.
+- **Canonical live copy:** the `voice_guide` tool on the `rotunda` MCP
+  connection (rotunda.jumpstartlab.com). Fetch it at cycle start and refresh
+  the local cache at `~/.config/compound-engineering/voice-guide.md` — that
+  cache is what reviewers read by path.
 - **Project override:** if the current project has `docs/writing/voice-guide.md`, it wins for that project — some work has a house voice that differs from Jeff's default.
-- **Canonical seed:** the version-controlled copy lives in the `ce-reviewers-jsl` repo at `voice/voice-guide.md`. On a fresh box the live copy is seeded from there (seed-if-absent) alongside the `*-sources.yaml` configs.
+- **Authoring home:** the version-controlled copy lives in the `ce-reviewers-jsl` repo at `voice/voice-guide.md`. Guide changes are PRed there, then republished to Rotunda with `voice_put` (see the compound phase). On a box with no Rotunda connection, the seeded local cache is the fallback.
 
-If no guide exists anywhere, say so before drafting and offer to bootstrap one from samples of Jeff's writing — the panel is far weaker without it, and every reviewer cites it by section.
+The same connection serves `voice_exemplars(register)` — matched pairs the
+draft stage writes against — and `voice_lint(draft, register)`, the
+stylometric gate. If no guide exists anywhere, say so before drafting and offer to bootstrap one from samples of Jeff's writing — the panel is far weaker without it, and every reviewer cites it by section.
 
 ## How you pick scope
 
@@ -167,6 +172,7 @@ Then you **iterate**, and this is the heart of the workflow:
 3. Re-run the panel on the revised draft.
 4. Repeat until there are no high-severity findings and the draft reads aloud clean.
 5. Cap the loop at three rounds. If it hasn't converged, surface the sticking point to Jeff — usually it means the brief or the voice guide is unsettled on this point, which is itself a compound-phase signal.
+6. The ship bar is twofold: the panel clean of high-severity findings, **and** the prose-review stylometric gate (`voice_lint`) at pass or borderline. A lint fail is a structural problem — revise the architecture (sentence mix, paragraph pacing), not the words, and re-run.
 
 If agent dispatch isn't available in the environment, `ce:prose-review` falls back to running the reviewers sequentially; the loop logic is unchanged.
 
@@ -180,7 +186,9 @@ When you revise, watch for corrections that generalize:
 - Jeff rewrites an opener → candidate rule about how he leads.
 - Jeff softens or sharpens a claim → candidate rule about his register.
 
-In the compound phase, write the generalized rule into `~/.config/compound-engineering/voice-guide.md` with a dated Changelog entry, and — for durability across boxes — offer to commit the same change back to `ce-reviewers-jsl`'s `voice/voice-guide.md`. That is how the team gets measurably better at sounding like Jeff, draft over draft.
+In the compound phase, write the generalized rule into the guide with a dated Changelog entry, PR it to `ce-reviewers-jsl`'s `voice/voice-guide.md` (the authoring home), and after it merges, republish with the Rotunda `voice_put` tool (slug `guide`, the new version label) so every machine and session serves the new rule immediately. Update the local cache too. That is how the team gets measurably better at sounding like Jeff, draft over draft.
+
+One more compound signal: when Jeff hand-corrects a draft, the before/after pair is ground truth the reconstruct-and-diff pilot can't synthesize — offer to add the pair to the longhand exemplars for the piece's register and republish them with `voice_put`.
 
 If a cycle genuinely revealed nothing new — a rare, clean run — say so explicitly rather than inventing a rule.
 
