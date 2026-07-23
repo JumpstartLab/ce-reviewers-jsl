@@ -237,9 +237,21 @@ education, software, AI-native engineering, mission-driven leadership.
   then say they're grouped. (Formal/technical band, but the instinct — describe rather than commit —
   is this section's core.)
 - Anything that "sounds like an AI wrote it."
+- The knowing-narrator flourish — "we know how this ends," "spoiler:", "this ends
+  badly," "here's the thing," foreshadowing a failure instead of stating it. Jeff:
+  "obnoxious." State the failure mode as a plain fact with its mechanism; the
+  facts carry the drama or there isn't any.
 
 ## 11. Changelog (Perkins appends here)
 
+- 2026-07-23 (v4.5) — Compound (live Jeff correction, Syyclops PR-queue team
+  note): §10 now names the **knowing-narrator flourish** — "we know how this
+  ends," "spoiler," foreshadowing constructions that narrate a failure's
+  drama instead of stating its mechanism. Jeff's word: "obnoxious." Rewrite
+  shape: replace the flourish with the plain causal fact ("when one merges,
+  the other two must regenerate — otherwise drizzle silently skips their
+  migration"). Kin to v4.2's manufactured clincher: both are the writer
+  performing instead of informing.
 - 2026-07-20 (v4.4) — Compound (from the Syyclops auth-audit issue-writing run): §10 now names the
   **aggregate-report hedge** — opening a bundled or multi-finding piece with "no single finding is
   serious, but together…". Surfaced when the seven-voice panel (King, with Minto, Handley, and
