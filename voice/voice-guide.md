@@ -241,8 +241,57 @@ education, software, AI-native engineering, mission-driven leadership.
   badly," "here's the thing," foreshadowing a failure instead of stating it. Jeff:
   "obnoxious." State the failure mode as a plain fact with its mechanism; the
   facts carry the drama or there isn't any.
+- **Announcing the move instead of making it** ("I want to start with a
+  story…", "My claim:", "I bring this up because…") and recap/bridge sentences
+  between points. Jeff plunges in and lets juxtaposition carry the transition.
+- **The appended wrap-up.** When a section or piece ends on a question, a
+  punchline, or a workaround, it ends there. No synthesizing coda, no verdict
+  after the closing question.
+- **Em dashes over budget.** Jeff's measured rate is ~3.6 per 1k words; model
+  drafts test at 3× that. Before typing a dash, ask whether Jeff would use a
+  colon (compressed explanation) or parentheses (aside) — usually he would.
 
-## 11. Changelog (Perkins appends here)
+## 11. Mechanical fingerprint (longhand baseline, 2026-07-23)
+
+Measured by the reconstruct-and-diff pilot in `JumpstartLab/longhand`
+(private): a 9-doc verbatim corpus vs. blind model reconstructions of the same
+content. The five most diagnostic numbers for "sounds like Jeff":
+
+| metric | Jeff | typical model draft |
+|---|---:|---:|
+| short sentences (≤7 words) | 23% | 13% |
+| single-sentence paragraphs | 29% | 11% |
+| questions per 100 sentences | 7.7 | 2.3 |
+| em dashes per 1k words | 3.6 | 11.9 |
+| parentheses per 1k words | 6.0 | 1.3 |
+
+Test a draft with `bin/stylometry <draft.md>` in the longhand repo; large
+deviations on these five are a fail even when the panel passes the prose.
+The discriminator result to remember: single paragraphs of model prose pass
+as Jeff (50% blind detection), whole documents never do (100%) — the tells
+are architecture (sentence mix, paragraph pacing, endings, transitions), so
+review at the document level, not the sentence level.
+
+**Exemplar injection (drafting rule).** When drafting on a machine where
+`/workspace/longhand/exemplars/<register>.md` exists, pull 2–4 matched pairs
+for the piece's register into the drafting context and write like the Jeff
+side of each pair. The pairs are excerpts from private documents — quote them
+into prompts, never into public files.
+
+## 12. Changelog (Perkins appends here)
+
+- 2026-07-23 (v4.6) — **Longhand pilot: empirical fingerprint.** Built
+  `JumpstartLab/longhand` (private): denatured 9 verbatim Jeff docs to
+  content-only outlines, had a blind model write them back, and measured the
+  gap (content held constant → deltas are pure voice). Added §11 (mechanical
+  fingerprint table + document-level review rule + exemplar injection) and
+  three kill-list items (announcing the move, appended wrap-ups, em-dash
+  budget). Key finding: the model's tells are architectural, not lexical —
+  its AI-tell lexicon score was near zero while it welded short sentences,
+  merged one-beat paragraphs, tripled em-dashes, and appended codas. Confirms
+  and quantifies v4.2's structural-symmetry insight and v4.5's
+  knowing-narrator rule at the corpus level. Full data: longhand
+  `reports/deltas.md`, `reports/discriminator/`.
 
 - 2026-07-23 (v4.5) — Compound (live Jeff correction, Syyclops PR-queue team
   note): §10 now names the **knowing-narrator flourish** — "we know how this
