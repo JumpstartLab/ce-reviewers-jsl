@@ -54,6 +54,14 @@ Collapsing these tiers into one confidence level is how contracts reviewers over
 - **Undocumented-but-observable behavior changes** — ordering, timing, incidental field
   presence on a shipped, consumed endpoint. Flag with tier-3 phrasing plus a consumer
   search.
+- **Changes riding beyond the stated intent** — a default, cap, threshold, or shared-hook
+  change whose actual consumers sit outside the PR's stated purpose. Field case: a
+  32 MB → ~1.86 GB upload-cap default on a shared hook rode in on a video-playback fix —
+  and the video path never called that hook; the only real consumer was chat attachments.
+  Diff every touched *default value* against the intent artifact, then Grep the
+  hook/constant's callers to name who is actually affected (that makes it tier 2). A
+  mismatch is "effectively a separate product decision — confirm intent or split it out,"
+  not a nit.
 - **Break-then-announce** — removal landing with no deprecation window, no migration
   note, no usage check. Checkable from the diff plus repo conventions.
 - **Reuse in both failure directions** — (a) duplicated logic that has *diverged*
