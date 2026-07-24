@@ -163,6 +163,29 @@ phases:
           each tied to its evidence. Never block on preference; the
           citation hierarchy (facts > style guide > engineering
           principle > codebase consistency) settles disputes.
+        - **Local vs. systemic — classify before a finding may
+          block.** Is the defect introduced by this diff, or is the
+          diff conforming to a standing convention that is itself
+          the problem? Grep for sibling instances outside the diff;
+          2+ pre-existing siblings the author didn't touch →
+          systemic. Systemic findings never block (holding one
+          author to a standard the module ignores is incoherent and
+          invites correct pushback) — they surface once as an
+          advisory routed to a decision artifact (ticket/ADR), then
+          enter the ledger as settled-pending-decision so no future
+          run re-raises them per-diff. Same treatment when the same
+          concern has been raised-and-deferred with the same
+          rationale in 2+ prior reviews: that's a one-time decision
+          being re-litigated at retail.
+        - **Nothing leaves without an owner.** Every surfaced
+          non-blocking finding carries exactly one disposition —
+          fixed-now, delegated with items enumerated, ticketed with
+          a link, or explicitly dropped. Enumerate delegated items
+          so an agent could execute them without asking (file:line,
+          change, acceptance check): in the field, enumerated
+          nit-lists got fixed same-day; identical nits left as
+          approval prose were never touched; a vague "take care of
+          the changes" delegation blocked the fix agent outright.
 
       **HARD GATE — persist before proceeding.** Write the report to
       docs/audits/<date>-<scope>-quality.md and announce the path.
@@ -208,6 +231,15 @@ phases:
 
       Required: at least one enforcement artifact per run. In rough
       order of strength:
+        - workflow tooling that removes the error class at the
+          source (co-strongest with lint — the mistake becomes
+          impossible instead of detected). When review keeps
+          catching the same *mechanical* error, automation of the
+          fix beats another check: a one-command migration
+          renumberer shipped and merged while two detect-and-fail
+          guardrail PRs for the same failure mode were closed as
+          redundant. Detection layers multiply review surface;
+          root-cause tooling retires it.
         - a lint rule that makes the finding class mechanical
           (strongest — it exits the review loop entirely)
         - a style-guide/ADR entry reviewers can cite next time
@@ -277,6 +309,19 @@ review-preferences:
 
 ## Run log (calibration the phases lean on)
 
+- **2026-07-24 syyclops (external repo, human+agent review week)**: five
+  lessons folded into the phases above. (1) A real authz finding was
+  systemic (every admin route shared the gate) but was raised as a
+  PR-level hold — author pushback was correct, and the resolution
+  (approve + file the repo-wide decision task) is now the synthesize
+  rule. (2) The same audit-logging concern was raised-and-deferred in
+  three PRs with the same rationale — re-litigation detector added.
+  (3) Non-blocking nits with no owner evaporated; enumerated ones were
+  bot-fixed same-day — disposition rule added. (4) A 32MB→1.86GB
+  upload-cap default rode a video-playback fix into an unrelated
+  feature — Hyrum's hunting list extended. (5) Root-cause automation
+  (mig:rebump) merged while two detect-and-fail guardrail PRs closed
+  as redundant — compound-phase artifact ranking extended.
 - **2026-07-17 Launcher (Rails)**: 11/11 candidates confirmed, 0 refuted.
 - **2026-07-18 Kondo (FastAPI/MCP)**: 25 candidates → 15 confirmed, 5
   refuted (~20% finder false-positive), 2 held as questions, 2 leave-alones.

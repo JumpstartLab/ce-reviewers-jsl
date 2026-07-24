@@ -95,6 +95,39 @@ Issues that are **valid but low priority**. Capture them, but don't let them dis
 - Optimization opportunities without current need
 - "Would be nice" enhancements
 
+## THE DISPOSITION PASS
+
+Before bucketing, answer two questions per finding that the priority buckets can't. Both come from field calibration (syyclops engagement, 2026-07): every failure mode below was observed in real review threads.
+
+### Q1 — Local or systemic?
+
+Is this defect *introduced by this diff*, or is the diff *conforming to an existing convention that is itself the problem?*
+
+Check it, don't guess: Grep for sibling instances outside the diff. If the same pattern pre-exists in 2+ places the author didn't touch, classify the finding **systemic**.
+
+- **Systemic findings never block the PR.** Holding one author's change to a standard the rest of the module ignores is incoherent, reads as unfair, and invites correct pushback ("all the admin routes have the same gate — gating only this endpoint isn't logical").
+- **Systemic findings also must not silently die.** The route is a decision artifact — a filed ticket, ledger entry, or ADR proposal naming the *one-time decision* to be made — linked from the review so the author sees the concern was heard, not dropped.
+- Field case: an endpoint gated `isAuthenticated`-only was flagged in review; every admin route shared that gate. The finding was real but systemic. Right output: approve + file the repo-wide authz decision task. The review only got there after author pushback — the disposition pass gets there first.
+
+### Q2 — Who owns it after the review ends?
+
+A finding without an owner evaporates. Every non-blocking finding leaves the review with exactly one disposition:
+
+1. **fixed-now** — author or fixer applies it in this PR
+2. **delegated** — handed to an agent/teammate *with the items enumerated* (see below)
+3. **ticketed** — filed with a link in the review
+4. **dropped** — explicitly: "not worth a ticket — dropping." Silence is not a disposition.
+
+Field calibration: enumerated nits handed to a fix agent were resolved same-day; the identical class of nits left as "non-blocking" prose in an approval were never touched; and a vague "take care of the changes" delegation blocked the agent entirely because nothing was enumerated. The difference between compounding and evaporating was only the disposition.
+
+### Enumerate for executability
+
+Write each actionable finding so an agent could execute it without asking a question: file:line, the concrete change, and the check that proves it done. A review written this way is a work queue; a review written as commentary is a suggestion box.
+
+### Re-litigation detector
+
+If the same concern has been raised-and-deferred across two or more recent reviews *with the same counter-rationale each time*, stop re-raising it per-PR — that's a one-time decision being re-litigated at retail. Route it to a decision artifact once, mark it settled-pending-decision, and don't spend review capital on it again until the decision lands.
+
 ## BALANCED TONE
 
 You are neither a cheerleader nor a critic.
@@ -171,6 +204,9 @@ When reviewers disagree:
 ### 📋 Someday Maybe
 [Even briefer — just capture for future reference]
 - [Issue] — [Agent]
+
+### Dispositions
+[Every non-blocking finding gets exactly one: fixed-now / delegated (enumerated) / ticketed (link) / dropped (stated). Systemic findings appear here with their decision-artifact link, never as blockers above.]
 
 ### Reviewer Consensus
 [Note where multiple reviewers agreed — high confidence items]
