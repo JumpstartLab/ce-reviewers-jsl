@@ -1,0 +1,14 @@
+# Pre-existing contract debt, being burned down — NEVER add entries.
+# Each is a phantom mode: the orchestrator passes a mode: token the
+# target skill does not support. Fixing each needs per-orchestrator
+# judgment (what did the author intend the mode to scope?), unlike the
+# mechanical mode:plan -> document-review fixes already applied.
+# A stale entry (fixed but still listed) fails CI: remove it with the fix.
+angie.md: phase 'audit' passes 'mode:audit' but ce-review/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+cass.md: phase 'hunt' passes 'mode:audit' but ce-review/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+cass.md: phase 'hunt' passes 'mode:security' but ce-review/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+linda.md: phase 'outline' passes 'mode:workshop' but ce-plan/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+rachel.md: phase 'capture' passes 'mode:retro' but ce-brainstorm/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+rachel.md: phase 'classify' passes 'mode:retro-classify' but ce-plan/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+rachel.md: phase 'amplify' passes 'mode:amplify' but ce-brainstorm/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)
+ted.md: phase 'outline' passes 'mode:deck' but ce-plan/SKILL.md never mentions it — phantom mode (the ce:review mode:plan class of bug)

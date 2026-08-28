@@ -22,8 +22,10 @@ phases:
       If the plan doesn't consider the consumer's perspective,
       send it back for revision.
   - name: plan-review
-    skill: ce:review
-    args: "mode:plan plan:$PLAN_PATH"
+    # ce:review has no plan mode — document review goes through
+    # document-review (bounded roster, headless mode).
+    skill: compound-engineering:document-review
+    args: "mode:headless $PLAN_PATH"
   - name: work
     skill: ce:work
     gate: |

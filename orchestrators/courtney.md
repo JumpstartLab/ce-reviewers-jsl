@@ -84,8 +84,10 @@ phases:
       is, one sentence on why it's joyful.
 
   - name: reality-check
-    skill: ce:review
-    args: "mode:plan plan:$IDEAS_PATH"
+    # ce:review has no plan mode — document review goes through
+    # document-review (bounded roster, headless mode).
+    skill: compound-engineering:document-review
+    args: "mode:headless $IDEAS_PATH"
     gate: |
       Ideas pass through a challenge round. Plan-reviewer agents
       stress-test the pitches — not to kill them, but to sharpen

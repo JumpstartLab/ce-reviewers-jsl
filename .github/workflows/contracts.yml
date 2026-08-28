@@ -1,0 +1,23 @@
+name: Contract tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check out compound-engineering plugin (skill contracts)
+        uses: actions/checkout@v4
+        with:
+          repository: JumpstartLab/compound-engineering-plugin
+          path: .plugin-checkout
+      - name: Install PyYAML
+        run: pip install pyyaml
+      - name: Validate persona and orchestrator contracts
+        run: >
+          python3 tests/validate_contracts.py
+          --plugin-dir .plugin-checkout/plugins/compound-engineering

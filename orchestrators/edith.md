@@ -135,8 +135,10 @@ phases:
       docs/scenarios/<feature-slug>/01–N-*.md, DETAILS.md, LATER.md.
 
   - name: plan-review-phasing
-    skill: ce:review
-    args: "mode:plan plan:$PLAN_PATH"
+    # ce:review has no plan mode — document review goes through
+    # document-review (bounded roster, headless mode).
+    skill: compound-engineering:document-review
+    args: "mode:headless $PLAN_PATH"
     gate: |
       Plan review is prompted to PHASE the work, not cut it. The
       orchestrator-LLM spawns 3+ plan reviewers in parallel (default
