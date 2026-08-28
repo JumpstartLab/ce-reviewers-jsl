@@ -14,7 +14,7 @@ agent-model: sonnet
 phases:
   - name: capture
     skill: ce:brainstorm
-    args: "mode:retro $ARGUMENTS"
+    args: "Facilitate a post-delivery retrospective capture (not a feature brainstorm) for: $ARGUMENTS"
     gate: |
       The instructor must surface, in their own words and while
       memory is fresh:
@@ -36,8 +36,9 @@ phases:
       been longer.
 
   - name: classify
-    skill: ce:plan
-    args: "mode:retro-classify"
+    # Orchestrator-driven: Rachel classifies the capture findings
+    # along the two axes below in-thread (this is judgment over
+    # retro output, not a planning task for ce:plan).
     gate: |
       Each finding from capture must be classified along two
       axes:
@@ -123,7 +124,7 @@ phases:
 
   - name: amplify
     skill: ce:brainstorm
-    args: "mode:amplify $ARGUMENTS"
+    args: "Brainstorm how this lesson's content compounds into other forms (follow-on lessons, articles, curriculum) for: $ARGUMENTS"
     gate: |
       An amplify session brainstorms how this lesson's content
       compounds into other forms. Optional, but valuable when

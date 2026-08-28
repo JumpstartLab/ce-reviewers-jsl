@@ -28,7 +28,7 @@ phases:
 
   - name: outline
     skill: ce:plan
-    args: "mode:deck $ARGUMENTS"
+    args: "Create a slide-by-slide deck outline (a presentation narrative plan, not a software implementation plan) for: $ARGUMENTS"
     gate: |
       A slide-by-slide outline must exist in docs/plans/. Each slide
       entry must specify: the beat it serves in the arc, the single
