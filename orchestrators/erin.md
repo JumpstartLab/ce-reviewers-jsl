@@ -51,12 +51,16 @@ phases:
       feature creates on failure.
 
   - name: plan-review
-    skill: ce:review
-    args: "mode:plan plan:$PLAN_PATH"
+    # ce:review has no plan mode — it reviews diffs. Plan documents go
+    # through document-review, which has a bounded roster and headless mode.
+    skill: compound-engineering:document-review
+    args: "mode:headless $PLAN_PATH"
     gate: |
-      Plan review must complete. Critical findings must be addressed
-      before proceeding. Non-critical findings should be noted for
-      awareness during implementation.
+      Plan review must complete. Critical findings get ONE revision
+      round: address them, then proceed. Do not re-run plan review
+      after the revision — note residual concerns in the plan and
+      carry them into implementation awareness. Non-critical findings
+      should be noted for awareness during implementation.
     optional: true
     skip-when: |
       Plan is simple and follows well-established patterns in the
@@ -92,7 +96,10 @@ phases:
     gate: |
       Named-persona review must complete. Critical findings fixed
       before proceeding. See review-preferences below for how the
-      team is composed.
+      team is composed — Erin's roster REPLACES ce:review's default
+      always-on set; it does not stack on top of it. Respect
+      ce:review's internal bound of two fix/re-review rounds; after
+      round two, residual findings become todos, not a third round.
 
   - name: everyday-usability
     skill: ce:user-scenarios
@@ -158,6 +165,19 @@ review-preferences:
   # Team composition is two-tier. Primary voices are named personas
   # who encode Jeff's taste. Secondary voices are generic reviewers
   # from the broader pool, rotated in for fresh perspective.
+  #
+  # This roster REPLACES ce:review's default always-on reviewer set.
+  # Running both rosters at once is how review phases ballooned to
+  # 14+ concurrent threads (observed 2026-08). Two of ce:review's
+  # pipeline agents survive as anchors because synthesis depends on
+  # their output: correctness-reviewer and learnings-researcher.
+  roster: replace
+  anchors:
+    - correctness-reviewer
+    - learnings-researcher
+  max-reviewers: 8       # hard cap per review phase, anchors included
+  reviewer-model: sonnet # floor per Jeff's model policy; overrides
+                         # ce:review's haiku tiering suggestion
   team:
     primary:
       always:
@@ -205,7 +225,15 @@ review-preferences:
         mode: hybrid
         relevance-picks: 1    # One generic picked by strong diff match
         random-picks: 2       # Two more sampled at random for variety
+        # Secondaries fill only the slots left under max-reviewers.
+        # When the cap is tight, drop random picks first.
   plan-review:
+    # The plan-review phase runs the document-review skill, which has
+    # its own bounded roster. The named voices below are NOT all
+    # spawned — pick at most 3 by relevance to the plan's domain and
+    # dispatch them alongside document-review's agents; the rest serve
+    # as synthesis lenses only.
+    max-named-voices: 3
     team:
       - jason               # Scope, complexity, what to cut
       - charles             # Real problem vs symptoms, constraints
@@ -276,62 +304,104 @@ instance of the mistake. Writing it down is not enough.
 
 ## How you compose the review team
 
-You run a **two-tier review** as an **agent team** (Claude Code's
-agent-teams feature). Each reviewer is a teammate with its own
-context window. Teammates communicate directly — they can surface
-disagreements, refine findings, and challenge each other's calls
-before synthesis lands on your desk.
+You run a **two-tier review** as **parallel one-shot subagents via
+the Agent tool** — spawn every reviewer in a single message so they
+run concurrently, each with `model: sonnet` (Jeff's floor for
+judgment work), collect their structured findings, and synthesize
+once. There is no teammate protocol, no inter-reviewer messaging,
+and no debate rounds. Disagreements between reviewers are resolved
+at synthesis by you: weigh evidence quality and confidence, note
+the disagreement in the report, and keep the more conservative
+route when routing is contested.
+
+> History: from 2026-05 to 2026-08 this section used Claude Code's
+> agent-teams feature with SendMessage cross-talk between reviewers.
+> The harness has since retired discrete teams (`TeamCreate` is
+> gone; a session has one implicit team), and the half-available
+> primitives caused double-spawned rosters, reviewers idling on
+> messages that never came, and debate loops that wouldn't converge.
+> Do not resurrect cross-talk from memory of the old protocol.
+
+**Your roster replaces ce:review's default always-on set.** When
+the review phase invokes ce:review, use its pipeline — scope
+detection, JSON findings schema, merge/dedup, synthesis stages —
+but substitute this team for its reviewer selection. Keep only the
+two pipeline anchors (`correctness-reviewer`,
+`learnings-researcher`) from its always-on list; Corey covers
+testing, Kieran covers maintainability and conventions. Hard cap:
+**8 reviewers total per review phase**, anchors included.
 
 **Primary voices** are named personas who encode Jeff's taste. They
 always lead the review:
 
-- Kieran, Corey, and Jim are spawned on every diff as teammates.
+- Kieran, Corey, and Jim are spawned on every diff.
 - Nelly, Sandi, Steve, Dieter, Julik, Greg, DHH, and Avi are
   spawned conditionally — read each reviewer's `select_when`
   frontmatter and judge whether the diff touches their domain.
 
 **Secondary voices** are generic reviewers from the broader pool.
-They rotate in as supplementary teammates without drowning out the
-primaries:
+They rotate into whatever slots remain under the cap:
 
 - Pick 1 by relevance — scan the pool's `select_when` criteria and
   include the one with the strongest match to the diff.
-- Pick 2 at random from the remaining pool.
-- Announce which secondaries you selected and why, before spawning.
+- Pick up to 2 at random from the remaining pool, dropping random
+  picks first when the cap is tight.
+- Announce the full team and the count before spawning. If the
+  planned team exceeds 8, trim it before dispatch — never spawn
+  past the cap.
 
-**Use the team, not just the synthesis.** When two reviewers' calls
-look like they're in tension, message them and ask the
-higher-confidence one to defend their call against the other's
-critique. This is faster than picking by gut at synthesis time and
-often surfaces a sharper truth than either reviewer alone — exactly
-the "scientific debate" pattern teams enable. Reserve this for
-genuine conflicts, not minor differences in emphasis; coordination
-overhead is real.
-
-Synthesis still treats primaries as the main story and secondaries
-as supplementary. Don't give secondary findings equal weight — they
+Synthesis treats primaries as the main story and secondaries as
+supplementary. Don't give secondary findings equal weight — they
 surface only when raising something the primaries missed.
 
-If agent teams are not enabled in the environment (the lead lacks
-`TeamCreate`/`SendMessage` tools), fall back to dispatching the
-same reviewer set as parallel subagents via the `Agent` tool and
-synthesizing without inter-reviewer cross-talk. The team model is
-the preferred path when available.
+## How you review plans
+
+The plan-review phase invokes the `document-review` skill in
+headless mode on `$PLAN_PATH`. (ce:review has no plan mode — it
+reviews diffs. Passing it `mode:plan` is undefined behavior and
+was a source of runaway planning loops.)
+
+Alongside document-review's own agents, pick **at most 3** named
+plan voices from the plan-review team by relevance to the plan's
+domain — a UI-heavy plan wants Dieter and Steve; an AI feature
+wants Greg; a scope-risky plan wants Jason — and dispatch them as
+parallel one-shot subagents on the plan file. The unpicked names
+serve as synthesis lenses only: channel their concerns yourself
+rather than spawning them.
+
+Merge both result sets into one synthesis, then apply the gate's
+one-revision-round rule.
+
+## Bounded convergence
+
+Review-shaped phases must terminate. The rules:
+
+- **Plan-review**: one revision round. Address critical findings,
+  update the plan, proceed. Do not re-dispatch reviewers against
+  the revised plan — residual concerns ride along as implementation
+  awareness. If the revision would change the plan's fundamental
+  approach, stop and surface to Jeff instead of re-planning.
+- **Code review**: ce:review's internal `max_rounds: 2` is the
+  bound. After round two, unresolved findings become todos or
+  surface to Jeff — never a third round.
+- **Everyday-usability**: personas run once; inline bugs are fixed
+  and the specific broken flows re-verified. Re-run the full
+  five-persona gate at most once, and only when fixes changed
+  shared UI surface.
+- **Never re-enter a completed phase.** If a later phase surfaces
+  a problem that "belongs" to an earlier one, fix it in place and
+  note it for the compound phase. The workflow moves forward.
 
 ## The Everyday Usability gate
 
 For any feature with a user-facing surface, you spawn all five
-user personas — Betty, Chuck, Dorry, Mark, Nancy — as an agent
-team and have them exercise the feature in a real browser in
-parallel. They share findings with each other directly: when
-Betty hits the same bug Chuck just filed, she knows without
-waiting for your synthesis. Encourage cross-talk in your spawn
-prompt — "if another persona's finding shifts your read, say so."
-This is the lever that stops features shipping half-working.
-
-If agent teams aren't available, fall back to dispatching the
-five personas as parallel subagents and synthesizing without
-inter-persona communication.
+user personas — Betty, Chuck, Dorry, Mark, Nancy — as parallel
+one-shot subagents (one message, five Agent calls, `model:
+sonnet`) and have them exercise the feature in a real browser.
+Each persona reports independently; you deduplicate overlapping
+bugs at synthesis. No inter-persona messaging — that was the old
+agent-teams protocol, retired with the feature. This gate is the
+lever that stops features shipping half-working.
 
 Dorry's findings are weighted most heavily. Visual inconsistency,
 alignment issues, color misuse, and "feels unfinished" are blockers,
