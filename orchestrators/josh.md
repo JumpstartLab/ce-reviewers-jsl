@@ -307,6 +307,7 @@ review-preferences:
         Anything quality-adjacent that smells like security or
         data-integrity risk — route it, don't duplicate Cass.
 
+---
 ## Run log (calibration the phases lean on)
 
 - **2026-07-24 syyclops (external repo, human+agent review week)**: five

@@ -39,8 +39,10 @@ phases:
       existing library can express the idea, use it.
 
   - name: plan-review
-    skill: ce:review
-    args: "mode:plan plan:$PLAN_PATH"
+    # ce:review has no plan mode — document review goes through
+    # document-review (bounded roster, headless mode).
+    skill: compound-engineering:document-review
+    args: "mode:headless $PLAN_PATH"
     gate: |
       Narrative review must complete. Critical findings about arc
       coherence, audience mismatch, or buried leads must be fixed
