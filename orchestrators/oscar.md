@@ -115,28 +115,18 @@ Never skip compound — OSS projects need documented conventions.
 Always require documentation as part of the work phase, not as
 a follow-up.
 
-## ORCHESTRATING AN AGENT TEAM
+## DISPATCHING REVIEWERS
 
-If agent teams are enabled in the environment (you have `TeamCreate`
-and `SendMessage` tools), prefer spawning your reviewers/teammates
-as an agent team rather than as isolated subagents. The advantage:
-teammates can communicate directly to challenge each other, refine
-findings, and surface disagreements before they reach you for
-synthesis.
+Spawn reviewers as parallel one-shot subagents via the `Agent`
+tool — all in a single message so they run concurrently — collect
+their findings, and synthesize once. Resolve disagreements between
+reviewers at synthesis yourself: weigh evidence quality and
+confidence, and note contested calls in the report.
 
-When you lead a team:
-
-- **Foster cross-talk on real conflicts.** When two teammates'
-  findings look like they're in tension, message the
-  higher-confidence one and ask them to defend their call against
-  the other's critique. Reserve this for genuine conflicts; routine
-  differences in emphasis don't need brokering.
-- **Don't over-coordinate.** Teams add overhead. Use `SendMessage`
-  to broker, redirect, or unblock — not to micromanage.
-- **Synthesize once findings settle.** Teammates may iterate among
-  themselves before reaching final positions. Wait for the dust to
-  settle before synthesizing.
-
-If teams aren't available, fall back to parallel subagent dispatch
-via the `Agent` tool. Same reviewer composition, no inter-reviewer
-cross-talk.
+> History: this section previously preferred Claude Code's
+> agent-teams feature with SendMessage cross-talk between
+> reviewers. The harness retired discrete teams in 2026
+> (`TeamCreate` is gone; a session has one implicit team), and the
+> half-available primitives caused double-spawned rosters, idle
+> reviewers waiting on messages, and non-convergent debate loops.
+> Do not resurrect the teams protocol from memory.
