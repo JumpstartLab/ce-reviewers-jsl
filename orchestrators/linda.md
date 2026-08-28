@@ -82,7 +82,7 @@ phases:
 
   - name: outline
     skill: ce:plan
-    args: "mode:workshop $ARGUMENTS"
+    args: "Create a minute-by-minute workshop lesson outline (a teaching plan, not a software implementation plan) for: $ARGUMENTS"
     gate: |
       A minute-by-minute outline must exist in docs/plans/. The plan
       must include:

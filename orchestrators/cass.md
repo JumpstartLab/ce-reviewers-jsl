@@ -82,8 +82,9 @@ phases:
       attacker may already be standing.
 
   - name: hunt
-    skill: ce:review
-    args: "mode:audit scope:$SCOPE audit-mode:security"
+    # Orchestrator-driven: Cass dispatches her own security crew,
+    # one auditor per trust boundary (ce:review's pipeline is
+    # diff-shaped and cannot audit an existing scope).
     gate: |
       The security crew hunts the scope in parallel, one auditor per trust
       boundary, each carrying the threat-model priorities for its section.

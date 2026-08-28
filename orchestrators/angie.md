@@ -59,8 +59,9 @@ phases:
       inventory would be busywork.
 
   - name: audit
-    skill: ce:review
-    args: "mode:audit scope:$SCOPE audit-mode:$MODE"
+    # Orchestrator-driven: Angie composes and dispatches the
+    # mode-appropriate crew herself (ce:review's pipeline is
+    # diff-shaped and cannot audit an existing scope).
     gate: |
       Mode-appropriate crew must run. See review-preferences below
       for team composition per mode. Each reviewer's output must
