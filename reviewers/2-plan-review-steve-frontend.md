@@ -75,6 +75,20 @@ Use TypeScript to help, not to show off:
 - If the types are hard to write, the design might be wrong
 - TypeScript should catch bugs, not create puzzles
 
+### 6. HOTWIRE ON SCREENS THAT SHOW MORE THAN ONE RECORD
+
+Learned on css-order-ingestion's proofing screen (2026-09-02 audit, PR #94): three
+reviewers independently reproduced silent corruption from the same two mistakes.
+Check any plan or diff that pairs turbo-frames or turbo-streams with Stimulus:
+
+- **Every stream target id carries the record id.** `cell-h-0-client` is a field; `cell-107-h-0-client` is a field on a record. A response that lands after the frame moved on must MISS, never hit a same-named element on another record.
+- **In-flight state lives in the DOM, keyed by id, never on `this`.** A `turbo_stream.replace` creates a new node and a new controller instance; anything the old instance owned (a promise chain, a `saving` class, an editor it would reopen) now points at a detached node. Resolve the live node at use time with `getElementById`; keep chains in a map keyed by dom id.
+- **Never derive "is anything pending" from a counter.** Count the DOM (`.saving` elements, a `data-*-pending` flag on a wrapper the streams do not replace). A counter resets on the stream that made it matter.
+- **A save chain never rejects.** A failure is an outcome rendered on the element, not an exception that skips every queued link after it.
+- **Async callbacks never take focus.** A late failure that reopens an editor and calls `focus()` blurs whatever the person is typing, and a blur that commits is data loss. Check `document.activeElement` first.
+- **`turbo:submit-end` fires after the form is detached; `turbo:before-cache` must clear transient classes** or back/forward restores a page stuck mid-save.
+- **The first browser test pays for itself.** These faults sit in the gap between Stimulus and Turbo that request specs cannot see; ask for one system test per race the plan names.
+
 ## Output Format
 
 Return your review as JSON. No prose outside the JSON block.
