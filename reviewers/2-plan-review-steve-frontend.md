@@ -89,6 +89,13 @@ Check any plan or diff that pairs turbo-frames or turbo-streams with Stimulus:
 - **`turbo:submit-end` fires after the form is detached; `turbo:before-cache` must clear transient classes** or back/forward restores a page stuck mid-save.
 - **The first browser test pays for itself.** These faults sit in the gap between Stimulus and Turbo that request specs cannot see; ask for one system test per race the plan names.
 
+Added after slice 2 of the same screen (PR #96, 2026-09-02): three more, each found by a persona in a real browser after two review rounds had passed the code.
+
+- **A stream target must not contain an input someone may be mid-typing in.** A note form inside the History region was wiped by every decision that replaced History. Split the record from the form; streams replace the record; the form resets itself on its own success.
+- **A control that hides itself must hand focus to what replaces it, and that must be a real button.** A fold's opener chip hides on open; a click-anywhere span cannot be tabbed to, so keyboard users were pinned open. The opened body carries a `<button>`, and the toggle moves focus to whichever control is showing. Any element with its own `display` needs a `[hidden]` restatement or it never hides.
+- **A failure handler checks it is still the latest write for its key.** With a per-cell save chain, a refused earlier commit must not reopen its abandoned value over a later commit that succeeded; compare against the last-submitted value before touching the DOM.
+- **A link inside a turbo-frame needs `data-turbo-action="advance"`** or the pane changes while the URL does not, and Back goes nowhere useful.
+
 ## Output Format
 
 Return your review as JSON. No prose outside the JSON block.
