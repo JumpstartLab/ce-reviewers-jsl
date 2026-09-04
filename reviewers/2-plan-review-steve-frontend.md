@@ -96,6 +96,14 @@ Added after slice 2 of the same screen (PR #96, 2026-09-02): three more, each fo
 - **A failure handler checks it is still the latest write for its key.** With a per-cell save chain, a refused earlier commit must not reopen its abandoned value over a later commit that succeeded; compare against the last-submitted value before touching the DOM.
 - **A link inside a turbo-frame needs `data-turbo-action="advance"`** or the pane changes while the URL does not, and Back goes nowhere useful.
 
+Added after slice 3 (PR #103, 2026-09-04): a frame visit that advances history is promoted to a history entry a beat AFTER it renders, and the promotion is not free.
+
+- **Nothing that must outlive a card click may be cleared on `turbo:before-cache`.** The promotion fires it after every card click; module maps cleared there forgot the reviewer's picks and cursor. Maps of ids need no clearing — a stale id paints nothing.
+- **A form whose answer matters does not ride Turbo's submission on such a screen.** The promotion's navigator stopped a bulk submission mid-flight: the server moved the threads, the answer was discarded, the queue said nothing. Own the request (fetch + `Turbo.renderStreamMessage`) — and then own everything Turbo did for you: the submitter disable, the redirect-to-login case, the refusal's persistence, the focus handoff's "is the reviewer still here" check.
+- **A guard read from the DOM is only as early as the mark.** Mark the cell saving at enqueue, not when the chain reaches its write; paint state back onto a replaced node synchronously in `targetConnected`, not on the next animation frame.
+- **A refusal persists until the state that caused it ends.** Never a CSS fade for a refusal; and a refusal the server or the network gave is not cleared by a DOM re-derivation.
+- **Anything that must be seen while the list is scrolled lives inside the sticky block**, and a hidden card hides its sibling controls.
+
 ## Output Format
 
 Return your review as JSON. No prose outside the JSON block.
