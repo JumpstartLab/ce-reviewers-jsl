@@ -54,6 +54,18 @@ The seven-voice panel for prose, run by the **Perkins** orchestrator. Each owns 
 | Ann Handley | Audience — will it land with the reader? | §9, §1 |
 | Bryan Garner | Vocabulary — the right term of art | §9, §5 precision |
 
+### Feedback Panel
+
+The five-lens panel for turning raw user feedback into work, run by the **Teresa** orchestrator. Dispatched in two waves (selected via `category: feedback`): the first three read the verbatim record, the last two review the draft triage built from it. Each lens carries an explicit do-not-flag list — the boundaries between them are the design.
+
+| Reviewer | Lens | Wave |
+|----------|------|------|
+| Indi Young | Listening — paraphrase drift, our vocabulary for theirs, symptoms banked as solutions, dropped items | 1 |
+| Grounding | Every claim checked against the running system; supplies "how it works now" and "why they saw that" | 1 |
+| Theme | How many problems is this really — one cause behind many symptoms, fake clusters, telling singletons | 1 |
+| Readiness | Ready to build vs blocked, and every blocked item must name the fact that blocks it | 2 |
+| Studs Terkel | The questions going back — answerable in a sentence, in their words, ranked by what they unblock | 2 |
+
 ## Orchestrators
 
 Orchestrators define *how* to run a project — which phases to execute, which reviewers to prioritize, when to skip steps, and how to synthesize findings.
@@ -77,6 +89,7 @@ Orchestrators define *how* to run a project — which phases to execute, which r
 | **Reena** | The Retro Runner | Post-ship deck retrospective — classifies, refactors, proposes PR upstream |
 | **Roger** | The Critic | PR review as a participant — verify the description's claims, panel the review-guide questions, adversarial verify, verdict, feedback composed via Perkins |
 | **Ted** | The Deck Builder | Slidev deck creation — narrative, craft, and audience review |
+| **Teresa** | The Discovery Lead | User feedback into work — verbatim capture, five-lens panel, ready-vs-blocked split, ranked questions back |
 
 ## User Personas
 
