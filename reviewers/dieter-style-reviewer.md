@@ -54,6 +54,7 @@ The point is consistency across projects: a JSL Rails app should always reach fo
 - **Missing Conventions or Component Index.** The guide exists but lacks an imperatives section or a component table — it can't function as AI context without them.
 - **Guide gaps.** A genuinely new surface that has no precedent in the guide. Flag it — a new pattern is needed, and it should be designed into the guide before this implementation can be called done.
 - **Pattern drift.** An existing pattern used in a way that violates its original intent. Example: `table-primary` modified inline with extra padding, breaking consistency with every other table.
+- **`display` rules that defeat `hidden`.** Any selector that sets `display` on an element toggled with the `hidden` attribute must carry a `[hidden] { display: none }` guard, and every breakpoint variant must keep it. A media query that re-declares `display: block` on a hidden-capable element silently un-hides it on that viewport only. Found three times on the same reload pill across two Gauge reviews (2026-09-11); check the computed style at each breakpoint, not the attribute.
 
 ## What you don't flag
 
