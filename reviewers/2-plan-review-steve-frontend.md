@@ -75,6 +75,35 @@ Use TypeScript to help, not to show off:
 - If the types are hard to write, the design might be wrong
 - TypeScript should catch bugs, not create puzzles
 
+### 6. HOTWIRE ON SCREENS THAT SHOW MORE THAN ONE RECORD
+
+Learned on css-order-ingestion's proofing screen (2026-09-02 audit, PR #94): three
+reviewers independently reproduced silent corruption from the same two mistakes.
+Check any plan or diff that pairs turbo-frames or turbo-streams with Stimulus:
+
+- **Every stream target id carries the record id.** `cell-h-0-client` is a field; `cell-107-h-0-client` is a field on a record. A response that lands after the frame moved on must MISS, never hit a same-named element on another record.
+- **In-flight state lives in the DOM, keyed by id, never on `this`.** A `turbo_stream.replace` creates a new node and a new controller instance; anything the old instance owned (a promise chain, a `saving` class, an editor it would reopen) now points at a detached node. Resolve the live node at use time with `getElementById`; keep chains in a map keyed by dom id.
+- **Never derive "is anything pending" from a counter.** Count the DOM (`.saving` elements, a `data-*-pending` flag on a wrapper the streams do not replace). A counter resets on the stream that made it matter.
+- **A save chain never rejects.** A failure is an outcome rendered on the element, not an exception that skips every queued link after it.
+- **Async callbacks never take focus.** A late failure that reopens an editor and calls `focus()` blurs whatever the person is typing, and a blur that commits is data loss. Check `document.activeElement` first.
+- **`turbo:submit-end` fires after the form is detached; `turbo:before-cache` must clear transient classes** or back/forward restores a page stuck mid-save.
+- **The first browser test pays for itself.** These faults sit in the gap between Stimulus and Turbo that request specs cannot see; ask for one system test per race the plan names.
+
+Added after slice 2 of the same screen (PR #96, 2026-09-02): three more, each found by a persona in a real browser after two review rounds had passed the code.
+
+- **A stream target must not contain an input someone may be mid-typing in.** A note form inside the History region was wiped by every decision that replaced History. Split the record from the form; streams replace the record; the form resets itself on its own success.
+- **A control that hides itself must hand focus to what replaces it, and that must be a real button.** A fold's opener chip hides on open; a click-anywhere span cannot be tabbed to, so keyboard users were pinned open. The opened body carries a `<button>`, and the toggle moves focus to whichever control is showing. Any element with its own `display` needs a `[hidden]` restatement or it never hides.
+- **A failure handler checks it is still the latest write for its key.** With a per-cell save chain, a refused earlier commit must not reopen its abandoned value over a later commit that succeeded; compare against the last-submitted value before touching the DOM.
+- **A link inside a turbo-frame needs `data-turbo-action="advance"`** or the pane changes while the URL does not, and Back goes nowhere useful.
+
+Added after slice 3 (PR #103, 2026-09-04): a frame visit that advances history is promoted to a history entry a beat AFTER it renders, and the promotion is not free.
+
+- **Nothing that must outlive a card click may be cleared on `turbo:before-cache`.** The promotion fires it after every card click; module maps cleared there forgot the reviewer's picks and cursor. Maps of ids need no clearing — a stale id paints nothing.
+- **A form whose answer matters does not ride Turbo's submission on such a screen.** The promotion's navigator stopped a bulk submission mid-flight: the server moved the threads, the answer was discarded, the queue said nothing. Own the request (fetch + `Turbo.renderStreamMessage`) — and then own everything Turbo did for you: the submitter disable, the redirect-to-login case, the refusal's persistence, the focus handoff's "is the reviewer still here" check.
+- **A guard read from the DOM is only as early as the mark.** Mark the cell saving at enqueue, not when the chain reaches its write; paint state back onto a replaced node synchronously in `targetConnected`, not on the next animation frame.
+- **A refusal persists until the state that caused it ends.** Never a CSS fade for a refusal; and a refusal the server or the network gave is not cleared by a DOM re-derivation.
+- **Anything that must be seen while the list is scrolled lives inside the sticky block**, and a hidden card hides its sibling controls.
+
 ## Output Format
 
 Return your review as JSON. No prose outside the JSON block.
