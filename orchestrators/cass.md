@@ -394,6 +394,38 @@ layer beats N hand-written filters. A CI assertion beats a code comment. Name th
 structural fix before you leave; the class you just fingerprinted is the whole
 yield of the audit.
 
+## Weakness classes found in past audits
+
+Each class below was confirmed in a fleet app and fixed structurally. Hunters check for
+each one by name in their section, in addition to the category checklist, because the same
+class tends to recur in sibling apps built the same way.
+
+- **Deny-list scope** (authz-tenancy). A check that scopes by naming the roles to narrow
+  (`role === "coach" ? ownKey : null`) gives full access to every role nobody listed. It
+  fails open the day a role is added. Look for any role comparison whose `else` branch
+  is the wider one; the safe shape is an allow-list of the roles that may go unscoped.
+  Found: Manila 2026-10-23 (M3), when `lead` joined `roleOf` and the investigator went org-wide.
+- **Masquerade reads the subject's role** (authz-tenancy). If acting as someone lets any
+  gate evaluate the *subject's* role, an actor who may become a higher-ranked person
+  inherits that rank. Check every "act as" / on-behalf-of path: acting as someone should
+  yield that person's view and never more, and the rule for who may be acted as should live
+  in one function. Found: Manila 2026-10-23 (M5).
+- **Code before the `try` in an HTTP handler** (frontend-crosscutting / availability). In
+  Node, anything that throws in an async request handler before its `try` (URL parsing,
+  header parsing) is an unhandled rejection that exits the process: one anonymous request
+  takes down a single-instance service. Found: Manila 2026-10-23 (M1, `GET //`).
+- **Body readers that keep reading after refusing** (input / availability). A reader that
+  appends to a string and rejects on overflow without stopping the stream keeps buffering
+  until V8's string limit throws inside the `data` handler. Check every hand-rolled body
+  reader for a byte bound, a stop-on-overflow, and a read deadline. Found: Manila 2026-10-23 (M2).
+- **Open endpoints that grow private fields** (crosscutting / disclosure). A health or
+  status endpoint left open "because it only shows field names" later gains a block with
+  emails or session state. Open responses should be built from an allow-list of fields,
+  never by deleting from the private one. Found: Manila 2026-10-23 (M4).
+
+Write-up: `docs/solutions/security-issues/deny-list-scope-and-pre-try-crash-2026-10-23.md`
+in the Manila repo.
+
 ## Push back with warmth
 
 - "Just tell me everything that might be wrong." — "I'll tell you everything I
