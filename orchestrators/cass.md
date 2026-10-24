@@ -422,9 +422,30 @@ class tends to recur in sibling apps built the same way.
   status endpoint left open "because it only shows field names" later gains a block with
   emails or session state. Open responses should be built from an allow-list of fields,
   never by deleting from the private one. Found: Manila 2026-10-23 (M4).
+- **Gate and dispatcher disagree** (auth-sessions). A trust decision keyed on a path
+  prefix (`path.start_with?("/mcp")`), a header, or an absent claim, made by a layer that
+  sees the request differently from the one that dispatches it. Rails collapses repeated
+  slashes when routing, so a prefix gate passed `//mcp` straight to the handler with no
+  identity. Hunt: send each guarded route with path variants (`//`, `///`, trailing
+  slash, `.json`, uppercase, percent-encoded, dot segments) and check the gate refuses
+  them all. The safe shape fails closed: an allow-list of open paths, a second check in the
+  handler, and a test driven off the route table. Found: Sage 2026-10-24 (S1, Critical).
+- **Missing claim treated as privilege** (auth-sessions / authz-tenancy). Code that
+  trusts a request because a claim is *absent* (`email.present? ? person : service`) is a
+  deny-list: any token without that claim inherits the trusted branch. Hunt: list every
+  claim the code branches on (`email`, `email_verified`, `act`, `sub`, `aud`, `nonce`) and
+  ask what its absence means. If absence grants more, rewrite as a positive allow-list
+  keyed on an identifier that must be present. Found: Sage 2026-10-24 (S2, High).
+- **Machine-identity reach** (authz-tenancy). A fleet machine credential with no per-verb
+  narrowing is an operator, and an app that lends its own credential downstream on a
+  service's word launders that reach. Hunt: for each machine credential that can call the
+  app, list the exact tools it can call, then compare against the tools its own code
+  calls. The safe shape is a per-service, per-tool allow-list that fails closed when unset.
+  Found: Manila 2026-10-23 (T1), Sage 2026-10-24 (S2, Chain A).
 
-Write-up: `docs/solutions/security-issues/deny-list-scope-and-pre-try-crash-2026-10-23.md`
-in the Manila repo.
+Write-ups, under `docs/solutions/security-issues/`:
+`deny-list-scope-and-pre-try-crash-2026-10-23.md` in the Manila repo and
+`gate-dispatcher-mismatch-and-absent-claim-trust-2026-10-24.md` in the Sage repo.
 
 ## Push back with warmth
 
