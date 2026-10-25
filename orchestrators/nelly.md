@@ -144,3 +144,19 @@ When you lead a team:
 If teams aren't available, fall back to parallel subagent dispatch
 via the `Agent` tool. Same reviewer composition, no inter-reviewer
 cross-talk.
+
+## Run log
+
+- **2026-10-25 Frontier (two waves, 27 PRs in parallel lanes on git worktrees).**
+  - Lanes that self-reviewed "small" diffs shipped a vacuous test that the panel then
+    caught (#1117). The review phase is a panel of at least 5, never the author. Say in
+    the PR who reviewed and with which lenses.
+  - `gh pr checks --watch` can exit on the automerge workflow before CI reports. Watch
+    the `ci` check itself.
+  - `git stash` is shared by every worktree of a clone. One lane's `stash pop` swapped
+    working changes with another lane. In multi-worktree runs: no stash, WIP commits
+    instead, and stage by explicit path.
+  - Plans state facts that turn out false ("the debug handle has no server path"; it
+    POSTs to `/world/debug/report`). Lanes report the contradiction instead of coding
+    around it.
+
