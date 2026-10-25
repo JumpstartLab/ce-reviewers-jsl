@@ -122,6 +122,25 @@ in `tools` frontmatter.)
 
 ## Field notes (compound loop — treat as extensions of the lists above)
 
+**2026-10-25, Frontier (TypeScript/vitest, web-runtime audit waves, PRs #1110–#1138).**
+- An assertion behind a runtime condition the test environment can make false is a
+  vacuous test. `if (cast) expect(...)` never ran because the unit environment loads no
+  GLBs, so the saloon was a plain lot. The file would have passed against the old geometry
+  (#1117). Hunt for `if (`, `?.`, early `return` and `for` over a possibly-empty collection
+  that wrap the only `expect` in a test. The fix is a hand-built fixture or an asserted
+  precondition, never the guard.
+- An instrument's zero must say whether it ran. An "audit off" report shaped like a clean
+  one turns every assertion on it into one that cannot fail. Ask for an `enabled` flag that
+  consumers check before trusting the number, plus a floor on samples (#1120).
+- Static-analysis tests (import graphs, source scans) must assert their population: every
+  import resolved, known edges seen, a fixture per syntactic form. They must also be shown
+  red on a known-bad input before the fix lands (#1115, #1128).
+- Under vitest a binding read before initialisation is `undefined`, not a TDZ throw. A
+  "load each module first" runtime test passed 230/230 over a real cycle. Only the static
+  graph test caught it (#1115). Don't accept a runtime import-order test as the cycle
+  guard.
+
+
 **2026-07-18, Kondo (mutation checks killed your own weak-assertion hypotheses — correctly).**
 - Meta-tests are tests too: AST walkers, parity gates, and expected-count
   assertions carry allowlists and magic numbers that drift. Check

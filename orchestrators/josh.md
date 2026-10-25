@@ -335,6 +335,16 @@ review-preferences:
 ---
 ## Run log (calibration the phases lean on)
 
+- **2026-10-25 Frontier (TypeScript/Three.js, quality review feeding Angie's audit, then
+  27 fix PRs #1110–#1138)**. The verify pass ran 21 claims: 1 refuted, 6 partly refuted,
+  9 demoted, 0 blockers surviving. Executed refutations (repro harnesses, mutation runs,
+  benches) moved more verdicts than reading did. One refutation was itself wrong: "zod is
+  not in the web bundle", from a grep that missed `Stage → script/load → shared/script →
+  zod`. Rule: a bundle-presence or reachability refutation must trace the import chain to
+  the end or build the bundle. A grep is a lead, not a verdict. During execution a single
+  self-review passed a vacuous test that a five-reviewer panel caught (#1117). Self-review
+  never counts as the review phase for a code change, whatever the diff size.
+
 - **2026-10-24 Manila (Node, Angie refactor audit, PRs #131–#142)**:
   the same shape appeared three times: one mapping copied N times,
   one copy drifted (masquerade codes R1, dialect forks R5, README
