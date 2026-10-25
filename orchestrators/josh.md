@@ -160,6 +160,18 @@ phases:
           SQLite/Postgres fork wrote overrides two different ways
           (`INSERT OR REPLACE` against `ON CONFLICT … COALESCE`,
           R5). Both became one table guarded by a parity test.
+        - **Stricter input is a choice, not a default fix.** When a
+          finding proposes making input stricter, first check
+          whether the input reaches a human through an LLM. Prefer
+          parse-forgivingly, echo-the-interpretation,
+          refuse-only-the-unreadable. Keep strictness where a silent
+          fallback returns wrong data (e.g. an enum typo). Evidence
+          (Sage Q7; Jeff's decision, 2026-10-25): the audit proposed
+          strict ISO for `as_of`; Jeff rejected it because Claude
+          writes dates from what a coach typed. The fix reads common
+          forms, takes the reading nearest today, refuses a future
+          date with a suggestion and echoes the date used, while
+          `momentum_ledger`'s `kind` became strict.
         - **Convergence ranks first.** Issues multiple lenses raised
           independently outrank any single lens's volume.
         - **Noise cap.** Total surfaced findings ≤ ~10 (blocking +
