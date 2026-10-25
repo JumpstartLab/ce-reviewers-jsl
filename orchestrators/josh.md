@@ -147,6 +147,19 @@ phases:
         - **Dedup and cap repeats.** A pattern occurring N times gets
           flagged at 2–3 instances plus "sweep the rest," never N
           comments.
+        - **A copied mapping is its own finding.** When the same
+          mapping (error→status, route list, field list, dialect
+          SQL, docs list) appears 3 or more times, that is a
+          finding, separate from any one copy's defect. Report
+          whether the copies already disagree, and propose a single
+          source plus a parity test that fails when a copy is
+          missing or disagrees. Evidence (Manila, 2026-10-24): the
+          masquerade code had drifted across ~14 copied error
+          ladders (`forbidden` on three routes,
+          `masquerade_forbidden` on the rest, R1), and the store's
+          SQLite/Postgres fork wrote overrides two different ways
+          (`INSERT OR REPLACE` against `ON CONFLICT … COALESCE`,
+          R5). Both became one table guarded by a parity test.
         - **Convergence ranks first.** Issues multiple lenses raised
           independently outrank any single lens's volume.
         - **Noise cap.** Total surfaced findings ≤ ~10 (blocking +
@@ -309,6 +322,12 @@ review-preferences:
 
 ---
 ## Run log (calibration the phases lean on)
+
+- **2026-10-24 Manila (Node, Angie refactor audit, PRs #131–#142)**:
+  the same shape appeared three times: one mapping copied N times,
+  one copy drifted (masquerade codes R1, dialect forks R5, README
+  route docs from Josh's Q9). Folded into synthesize as "a copied
+  mapping is its own finding".
 
 - **2026-07-24 syyclops (external repo, human+agent review week)**: five
   lessons folded into the phases above. (1) A real authz finding was
