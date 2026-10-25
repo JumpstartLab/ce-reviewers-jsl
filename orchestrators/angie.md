@@ -324,6 +324,20 @@ synthesis:
     catch it next time? If the audit surfaced the same issue
     across 3+ files, that's a reviewer-rule candidate, not a
     line item.
+
+    Copied mappings are a standing check in every mode. When the
+    same mapping (error→status, route list, field list, dialect
+    SQL, docs list) appears 3 or more times, that is a finding.
+    Report whether the copies already disagree, and propose a
+    single source plus a parity test that fails when a copy is
+    missing or disagrees. Evidence: Manila's 2026-10-24 refactor
+    audit found the masquerade code had already drifted across
+    copied error ladders (R1: `forbidden` on three routes,
+    `masquerade_forbidden` on the coach reads), and the store's
+    dialect fork wrote the same override two ways (R5: SQLite
+    `INSERT OR REPLACE` dropped columns the Postgres `ON CONFLICT
+    … COALESCE` kept). Neither copy set had a test that compared
+    the copies.
 ---
 
 ## Before doing anything: are you in the main session?
